@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/GPU-CNN.dir/aligner.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/blob.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/bn_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/cfan.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/common_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/conv_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/face_detection.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/face_identification.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/fust.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/log.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/math_functions.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/mlp.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/nms.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/pad_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/sift.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o"
+  "GPU-CNN.pdb"
+  "GPU-CNN"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/GPU-CNN.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
