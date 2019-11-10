@@ -42,10 +42,10 @@
 class NetRegistry {
  public:
   typedef std::shared_ptr<Net> (*Creator)();
-  typedef std::map<std::string, Creator> CreatorRegistry;  // CreatorRegistry是std::map<>类。
+  typedef std::map<std::string, Creator> CreatorRegistry;  
 
   static CreatorRegistry& Registry() {
-    static CreatorRegistry* g_registry_ = new CreatorRegistry();	//注意，创建新的net时，是存在动态内存中的；新建的net实质上是std::map<>类对象。
+    static CreatorRegistry* g_registry_ = new CreatorRegistry();	
     return *g_registry_;
   }
 
@@ -57,8 +57,7 @@ class NetRegistry {
     registry[type] = creator;
   }
 
-  //新建的net实质上是std::map<net_type>类对象。
-  //返回的是新建的net所在的指针（动态存储）。
+
   static std::shared_ptr<Net> CreateNet(const std::string type) {
     CreatorRegistry& registry = Registry();
     if (registry.count(type) != 1) {

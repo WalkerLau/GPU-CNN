@@ -66,7 +66,6 @@ class Blob {
     return ((n * channels() + c) * height() + h) * width() + w;
   }
   void SetData();
-  // 将输入的Blob对象的shape_、count_、data_成员复制给调用对象
   void SetData(Blob &source);
   void SetData(int n, int c, int h, int w);
   void CopyData(int n, int c, int h, int w, const float* const data);
@@ -74,13 +73,12 @@ class Blob {
   void CopyData(int n, int c, int h, int w, const unsigned char* const  data);
   // copy data to unsigned char
   void CopyTo(unsigned char* const data);
-  // copy data to float；将Blob对象的data_所指的全部数据（有count_个）复制到输入参数所在的地址。
   void CopyTo(float* const data);
   void ToFile(const std::string file_name);
   void ToBinaryFile(const std::string file_name);
 
   inline const float operator [](int i) const {
-    return data_.get()[i];		//  data_是一个装浮点数的类的对象，data_.get()[i]应该代表该对象的成员data_中的第i个值。
+    return data_.get()[i];		
   }
   inline float & operator [](int i) {
     return data_.get()[i];
@@ -98,7 +96,7 @@ class Blob {
   inline int shape(int index) const {
     return index < shape_.size() ? shape_[index] : 1;
   }
-  std::shared_ptr<float> data_;		// shared_ptr<> 是一种智能指针模板，该指针所指位置为动态存储，且可以自动释放（delete）
+  std::shared_ptr<float> data_;		
   std::vector<int> shape_;
   int count_;
 };

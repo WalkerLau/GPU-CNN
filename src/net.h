@@ -46,7 +46,6 @@ class Net {
   // initialize the networks from a binary file
   virtual void SetUp();
   // execute the networks
-  // 声明Execute为纯虚函数, 函数体里没有实现代码（即使有也不执行），纯粹用来给继承的子类实现，由子类实现函数功能。
   virtual void Execute() = 0;
 
   // check input blobs
@@ -103,7 +102,7 @@ class Net {
     return params_;
   }
   Blob* params(int i) {
-    return &(params_[i]);	// params_[i]代表的应该是第i个params_对象（Blob类）。
+    return &(params_[i]);	
   }
   // count the number of unreleased output blobs
   inline int num_output() {
@@ -127,7 +126,6 @@ class Net {
   // subnet of the networks
   std::vector<std::shared_ptr<Net> > nets_;
 
-  // plugs；该类型为数组，它的元素也是数组，元素数组里装的是指向Blob类对象的指针。
   std::vector<std::vector<Blob*> > output_plugs_;
   std::vector<std::vector<Blob*> > input_plugs_;
 

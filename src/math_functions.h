@@ -46,11 +46,7 @@
 #include <armadillo>
 #endif
 
-// chg 加：加入编译声明语句
-//#ifdef SDSOC
-//#pragma SDS data access_pattern(x:SEQUENTIAL, y:SEQUENTIAL)
-//#pragma SDS data mem_attribute(x:PHYSICAL_CONTIGUOUS, y:PHYSICAL_CONTIGUOUS)
-//#endif // SDSOC
+
 float simd_dot(const float* x, const float* y, const long& len);
 
 // matrix product:
@@ -58,11 +54,7 @@ float simd_dot(const float* x, const float* y, const long& len);
 // MB = tb ? B^T : B;
 // return C(n, m) = MA(n, k) * MB(k, m);
 
-//chg 加：加入编译声明语句
-//#ifdef SDSOC
-//#pragma SDS data access_pattern(A: SEQUENTIAL, B:SEQUENTIAL, C:SEQUENTIAL)
-//#pragma SDS data mem_attribute(A:PHYSICAL_CONTIGUOUS, B:PHYSICAL_CONTIGUOUS, C:PHYSICAL_CONTIGUOUS)
-//#endif // SDSOC
+
 void matrix_procuct(const float* A, const float* B, float* C, const int n,
     const int m, const int k, bool ta = false, bool tb = false);
 

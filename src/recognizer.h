@@ -73,7 +73,7 @@ public:
       std::cout<< model_path << " not exist!" << std::endl;
       exit(-1);
     }
-	// 把model里面的各种数据读出来。
+
     CHECK_EQ(fread(&crop_channels_, sizeof(int), 1, file), 1); 
     CHECK_EQ(fread(&crop_height_, sizeof(int), 1, file), 1);
     CHECK_EQ(fread(&crop_width_, sizeof(int), 1, file), 1);
@@ -93,24 +93,14 @@ public:
     return 1;
   }
 
-  // 抽取特征值所用的方法。
   uint8_t ExtractFeature(unsigned char* const u_data, float* const feat, 
       int n = 1) {
 
-	// chg 测：测出父网络的input_blobs_成员只有一个元素; 而nets_成员有11个元素。--------------------------------------------------------
-	//std::cout << "input_blobs_ size : " << net_->input_blobs().size() << std::endl;
-	//std::cout << "son_net size : " << net_->nets().size() << std::endl;
-
-    net_->input_blobs(0)->CopyData(n, crop_height_, crop_width_,		// 用crop的要求尺寸和输入图片数据给input_blobs_[0]赋值(shape_、count_、data_)；并将src_img_data的data数据从8位提升为float型。
+    net_->input_blobs(0)->CopyData(n, crop_height_, crop_width_,		
 		                           crop_channels_, u_data);
-    net_->input_blobs(0)->Permute(1, 4, 2, 3);	// 重新排列对象中的data_成员里面的数据以及shape_数组的数据（变成n~w~c~h）
+    net_->input_blobs(0)->Permute(1, 4, 2, 3);
 
-	// 注意，Execute()在类声明中已经被声明为“纯虚函数”，其具体功能由子类定义（由创建这个net对象时所用的net_type来决定）。
-	// 执行网络的运算,下面这条语句专指执行CommonNet类定义的Execute成员函数，定义在common_net.cpp中。
 	net_->Execute();
-
-	//	chg 测：output_blobs的data_不是已经被release了吗？？？？？---------------------------------------------------------
-	// std::cout << "output_blobs_[0].data_ = " << net_->output_blobs(0)-> data() << std::endl;
 
     net_->output_blobs(0)->CopyTo(feat);
     net_->Release();

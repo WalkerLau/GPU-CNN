@@ -38,7 +38,7 @@
 typedef float* FaceFeatures;
 
 namespace seeta {
-class FaceIdentification {		// FaceIdentification类对象的实际成员函数实际上都定义在其嵌套类Recognizer中。
+class FaceIdentification {		
 public:
   // For cropping face only, you don't need a identification model, modelPath  \
    can be set NULL.

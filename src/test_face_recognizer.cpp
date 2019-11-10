@@ -78,7 +78,6 @@ using namespace std;
 
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
-//chg 加
 #include "opencv2/core.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
@@ -124,7 +123,6 @@ void TEST(FaceRecognizerTest, CropFace) {
   ifs.open(test_dir + "test_file_list.txt", std::ifstream::in);
   clock_t start, count = 0;
   int img_num = 0;
-  // test_file_list.txt 里面存了多张图片的文件名和5点坐标
   while (ifs >> img_name) {
     img_num ++ ;
     // read image
@@ -132,12 +130,10 @@ void TEST(FaceRecognizerTest, CropFace) {
     EXPECT_NE(src_img.data, nullptr) << "Load image error!";
 
     // ImageData store data of an image without memory alignment.
-	  // ImageData 是自定义结构体，可存图像像素（uint8_t型）的指针（data），图像的长、宽、通道信息。
     ImageData src_img_data(src_img.cols, src_img.rows, src_img.channels());
     src_img_data.data = src_img.data;
 
     // 5 located landmark points (left eye, right eye, nose, left and right corner of mouse).
-    // FacialLandmark 是一个结构体，存点的二维坐标。
     for (int i = 0; i < 5; ++ i) {
       ifs >> pt5[i].x >> pt5[i].y;
     }
@@ -208,7 +204,7 @@ void TEST(FaceRecognizerTest, ExtractFeature) {
 
     /* Extract feature */
     start = clock();
-    face_recognizer.ExtractFeature(src_img_data,	// 传进这个结构体的是src_img_data（ImageData）的引用。
+    face_recognizer.ExtractFeature(src_img_data,	
       feat_sdk + img_num * feat_size);
     count += clock() - start;
 
@@ -221,7 +217,7 @@ void TEST(FaceRecognizerTest, ExtractFeature) {
     // 看一下这张图的准确率
     std::cout<<"Similarity of this pic is: "<<sim<<std::endl;
     // 显示读图张数
-    std::cout<<"Finish extracting image -------------------------------------------------------------------------------------"<< img_num + 1 << std::endl;
+    std::cout<<"Finish extracting image -----------------------------------------------------------------------------"<< img_num + 1 << std::endl;
 
     average_sim += sim;
     img_num ++ ;

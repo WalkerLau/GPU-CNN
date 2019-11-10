@@ -59,7 +59,7 @@ CommonNet::~CommonNet() {
 std::shared_ptr<Net> CommonNet::Load(FILE* file) {
   
   // Todo: assert file format
-  int len;  // len是net_的类型的名字字符长度。
+  int len;  
   CHECK_EQ(fread(&len, sizeof(int), 1, file), 1);
   char* net_type = new char[len + 1];
 
@@ -68,39 +68,33 @@ std::shared_ptr<Net> CommonNet::Load(FILE* file) {
   net_type[len] = '\0';
   LOG(INFO) << "Creating " << net_type << " net ...";
   
-  //根据所需类型创建网络；并用指向Net类型对象的智能指针net来指向该新建网络类对象。
   std::shared_ptr<Net> net = NetRegistry::CreateNet(net_type);	
 
-  // params; 配置net对象的hyper_param_成员（HyperParam类），即读取file，并将读取到的参数放到v_float_成员。
   net->hyper_param()->Load(file);		
   // Todo: name
 
-  net->SetUp();		// 不同类型的net有不同的setup定义。
+  net->SetUp();		
 
-  // chg 测---------------------------------------------------------------
+  // chg test---------------------------------------------------------------
   std::cout << "net type:" << net_type << "\nparams_blobs size is : " << net->params().size() << std::endl;
 
-  // chg 测---------------------------------------------------------------
+  // chg test---------------------------------------------------------------
   std::cout << "param loop --- begin " << std::endl;
 
-  // 把项目组model的shape_、data_等参数复制给net的成员params_
-  for (int i = 0; i < net->params().size(); ++ i) {		// 循环的次数是net所指对象的params_成员的长度（个数）。
-    Blob param(file);	// 把项目组model的特征值参数初始化给Blob类对象param的数据成员shape_和data_。
+  for (int i = 0; i < net->params().size(); ++ i) {		
+    Blob param(file);	
 
     LOG(INFO) << net_type << " net blobs[" << i << "]: (" << param.num() << ","
     << param.channels() << "," << param.height() << ","<< param.width() << ")";
 		
-	// chg 测---------------------------------------------------------------
+	// chg test---------------------------------------------------------------
 	std::cout << "net blobs[" << i << "]: " << param.num() << ","
 			  << param.channels() << "," << param.height() << "," << param.width() << std::endl;
 
-	// net是指向Net（派生？）类型对象的指针，其成员函数params(int)本应返回std::vector<Blob>类型对象（类似于Blob类）的地址，但被强制转换为了Blob对象的地址；
-	// 下面一行给net所指对象的第i个params_成员（记住这成员现为Blob类型的对象）进行初始化，初始化的值是param的数据，初始化方式是一一对应地初始化shape_、data_等成员。
-	// 也就是将项目组model中的数据赋给了net所指的对象的成员params_。
 	net->params(i)->SetData(param);		
   }
 
-  // chg 测---------------------------------------------------------------
+  // chg test---------------------------------------------------------------
   std::cout << "param loop --- done " << std::endl;
 
   int num_subnet = net->nets().size();
@@ -113,25 +107,21 @@ std::shared_ptr<Net> CommonNet::Load(FILE* file) {
   std::vector<std::vector<Blob*> >& output_plugs = net->output_plugs();
   std::vector<std::vector<Blob*> >& input_plugs = net->input_plugs();
     
-  // subnet；从文件加载子网络
   for (int i = 0; i < num_subnet; ++ i) {
 
-	// chg 测：追踪网络的嵌套情况---------------------------------------------------------------
+	// chg test：追踪网络的嵌套情况---------------------------------------------------------------
 	std::cout << "Subnet load --- begin---as index :" << i << std::endl;
 
     nets[i] = Load(file);
 
-	// chg 测：追踪网络的嵌套情况---------------------------------------------------------------
+	// chg test：追踪网络的嵌套情况---------------------------------------------------------------
 	std::cout << "Subnet load --- done ---as index :" << i << std::endl;
 
-    nets[i]->SetFather(net.get());		//记录该子网的father是net对象。
+    nets[i]->SetFather(net.get());		
   }
 
-  // input and output plugs；用input_blobs_来配置io_plugs_
   if (num_subnet == 0) {
     for (int i = 0; i < num_in; ++ i) {
-	  // push_back 方法将参数插入到vector末端，作为最后一个元素。
-	  // 若父网络中不包含子网络，则将父网络第i个input_blobs_（的地址）插入到input_plugs_的第i个元素（是一个vector）的末尾。
       input_plugs[i].push_back(&(input_blobs[i]));	
     }
   }
@@ -144,11 +134,11 @@ std::shared_ptr<Net> CommonNet::Load(FILE* file) {
         CHECK_EQ(fread(&net_idx, sizeof(int), 1, file), 1);
         CHECK_EQ(fread(&blob_idx, sizeof(int), 1, file), 1);
         if (net_idx == -1) { // connected to father net
-          input_plugs[blob_idx].push_back(nets[i]->input_blobs(j)); // 把子网络的第j个input_blobs_传到父网络input_plugs_的某个元素（是一个vector）的末尾？
+          input_plugs[blob_idx].push_back(nets[i]->input_blobs(j)); 
         }
         else {
           nets[net_idx]->output_plugs(blob_idx).push_back(
-            nets[i]->input_blobs(j));	// 把子网络的第j个input_blobs_传到另一个子网络的output_plugs_中的某个元素（是一个vector）的末尾。
+            nets[i]->input_blobs(j));	// 
         }
       }
     }
@@ -159,9 +149,9 @@ std::shared_ptr<Net> CommonNet::Load(FILE* file) {
       CHECK_EQ(fread(&net_idx, sizeof(int), 1, file), 1);
       CHECK_EQ(fread(&blob_idx, sizeof(int), 1, file), 1);
       nets[net_idx]->output_plugs(blob_idx).push_back(
-          &(output_blobs[i]));		// 把父网络的第i个output_blobs_（的地址）传到某个子网络的output_plugs的某个元素的末尾。
+          &(output_blobs[i]));		
     }
-    for (int i = 0; i < num_subnet; ++ i) {	// 检查每个子网络是否存在未被release的output_blobs_
+    for (int i = 0; i < num_subnet; ++ i) {	
       if (nets[i]->num_output() > 0) {
         LOG(ERROR) << "There are " << nets[i]->num_output() 
           << " output blobs unlinked!";

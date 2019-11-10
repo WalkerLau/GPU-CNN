@@ -65,11 +65,6 @@ void EltwiseNet::SetUp() {
   // MAX
 }
 
-/*EltwiseNet的三个功能：
-*		1. 给input volume的每个元素分别加对应的偏置值bias：其中bias的数据存在etlwise的params_成员中，加完偏置后将结果复制到output所指向的blob。
-*		2. 给input volume的每个元素乘上同一个缩放因子scale_。
-*		3. 给input volume的每个元素作值的限定，上限为upper_，下限为lower_超出限定范围的值取upper_或lower_。
-*/
 void EltwiseNet::Execute() {
   CheckInput();
   if (op_ == "BAIS_ADDER") {

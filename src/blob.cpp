@@ -72,8 +72,6 @@ Blob::Blob(int n, int c, int h, int w, float* data) {
   memcpy(data_.get(), data, count_ * sizeof(float));
 }
 
-// 把file中的n、c、h、w值存到Blob对象的shape_成员
-// 把file中的n*c*h*w个特征值存到Blob对象的data_成员
 Blob::Blob(FILE* file) {
   shape_.resize(4);
   CHECK_EQ(fread(&(shape_[0]), sizeof(int), 1, file), 1);
@@ -101,12 +99,7 @@ void Blob::reshape(int n, int c, int h, int w) {
   data_ = nullptr; 
 }
 
-// 重新排列对象中的data_成员里面的数据以及shape_数组的数据：
-// 对于input_blobs[0]对象，有：
-//		4个for循环先后对应 n~w~c~h；
-//		offset的参数分别对应已经处理完毕的 n、c、h、w 数，总之其作用是定位正在处理中的data_元素;
-//		将data_的维度组织方式从 n~c~h~w 转换为 n~w~c~h，重新排列data_里面的数据；
-//		将shape_数组的内容从 {N, C, H, W} 转换为 {N, W, C, H} 。
+
 void Blob::Permute(int dim1, int dim2, int dim3, int dim4) {
   // todo: check permute
   std::vector<int> dim(4), redim(4), idx(4);
@@ -122,7 +115,7 @@ void Blob::Permute(int dim1, int dim2, int dim3, int dim4) {
       for (idx[2] = 0; idx[2] < shape_[dim[2]]; ++ idx[2]) {
         for (idx[3] = 0; idx[3] < shape_[dim[3]]; ++ idx[3]) {
           tmp[cnt] = dat[offset(idx[redim[0]], idx[redim[1]], idx[redim[2]],
-              idx[redim[3]])];	// data_成员是四维数组，其维度组织方式是（从高到低）：n~c~h~w 。 
+              idx[redim[3]])];	
           cnt ++ ;
         }
       }
