@@ -529,6 +529,8 @@ GPU-CNN: CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o
 GPU-CNN: CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o
 GPU-CNN: CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o
 GPU-CNN: CMakeFiles/GPU-CNN.dir/build.make
+GPU-CNN: /usr/lib/x86_64-linux-gnu/libcudart_static.a
+GPU-CNN: /usr/lib/x86_64-linux-gnu/librt.so
 GPU-CNN: /usr/local/lib/libopencv_dnn.so.4.1.2
 GPU-CNN: /usr/local/lib/libopencv_gapi.so.4.1.2
 GPU-CNN: /usr/local/lib/libopencv_highgui.so.4.1.2
@@ -538,6 +540,8 @@ GPU-CNN: /usr/local/lib/libopencv_photo.so.4.1.2
 GPU-CNN: /usr/local/lib/libopencv_stitching.so.4.1.2
 GPU-CNN: /usr/local/lib/libopencv_video.so.4.1.2
 GPU-CNN: /usr/local/lib/libopencv_videoio.so.4.1.2
+GPU-CNN: /usr/lib/x86_64-linux-gnu/libcudart_static.a
+GPU-CNN: /usr/lib/x86_64-linux-gnu/librt.so
 GPU-CNN: /usr/local/lib/libopencv_imgcodecs.so.4.1.2
 GPU-CNN: /usr/local/lib/libopencv_calib3d.so.4.1.2
 GPU-CNN: /usr/local/lib/libopencv_features2d.so.4.1.2
