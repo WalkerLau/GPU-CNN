@@ -30,10 +30,6 @@
 */
 
 #include "math_functions.h"
-//chg 删：#include <xmmintrin.h>
-//#include <cstdint>
-// test for vscode
-
 
 #ifdef _WIN32
 #include <intrin.h>
@@ -43,8 +39,8 @@
 
 
 // simd_dot采用了SIMD技术
+// 注意：simd_dot函数在其他多个文件中也有被引用（条件分支），所以不要更改这个函数的名字
 float simd_dot(const float* x, const float* y, const long& len) {
-	//chg 测: std::cout << "simd_dot len = " << len << std::endl;
 	float inner_prod = 0.0f;
 	__m128 X, Y; // 128-bit values
 	__m128 acc = _mm_setzero_ps(); // set to (0, 0, 0, 0)
@@ -66,18 +62,8 @@ float simd_dot(const float* x, const float* y, const long& len) {
 	return inner_prod;
 }
 
-
-/*
-float simd_dot(const float* x, const float* y, const long& k){	// 注意：simd_dot函数在其他多个文件中也有被引用（条件分支），所以不要更改这个函数的名字
-	float inner_prod = 0;
-	for(int i = 0; i < k; i++){
-		inner_prod += x[i]*y[i];
-	}
-	return inner_prod;
-}
-*/
-
-// matrix_procuct的输入分别为：输入数据首地址A、权重数据首地址B、输出数据首地址C、ofmap平面元素数量n、output volume的channel数m、一个filter的元素数量k。。。
+// matrix_procuct的输入分别为：输入数据首地址A、权重数据首地址B、输出数据首地址C、ofmap平面元素数量n、
+// output volume的channel数m、一个filter的元素数量k。。。
 void matrix_procuct(const float* A, const float* B, float* C, const int n,
 	const int m, const int k, bool ta, bool tb) {
 	const float* x = B;
@@ -89,5 +75,5 @@ void matrix_procuct(const float* A, const float* B, float* C, const int n,
 		}
 		x += k;
 	}	
-
 }
+

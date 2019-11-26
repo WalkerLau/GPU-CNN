@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o"
+  "CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o"
   "CMakeFiles/GPU-CNN.dir/aligner.cpp.o"
   "CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o"
   "CMakeFiles/GPU-CNN.dir/blob.cpp.o"

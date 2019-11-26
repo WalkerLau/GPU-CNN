@@ -57,6 +57,7 @@ CMakeFiles/GPU-CNN.dir/conv_net.cpp.o
  /cuda/seeta/src/conv_net.h
  /cuda/seeta/src/hyper_param.h
  /cuda/seeta/src/log.h
+ /cuda/seeta/src/math_functions.cuh
  /cuda/seeta/src/math_functions.h
  /cuda/seeta/src/net.h
  /cuda/seeta/src/net_factory.h

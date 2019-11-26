@@ -29,18 +29,16 @@
  *
  */
 
+#include <cuda_runtime_api.h>
+#include <cuda_runtime.h>
 #include "conv_net.h"
 #include "math_functions.h"
+#include "math_functions.cuh"
 #include "time.h"
 #include "ctime"
 
 #ifdef __VIPL_LOG__
 #include <ctime>
-#endif
-
-
-#ifdef SDSOC    // chg 加：for sds_alloc
-#include "sds_lib.h"
 #endif
 
 void ConvNet::SetUp() {
@@ -88,37 +86,31 @@ void ConvNet::Execute() {
 
   const int src_num_offset = src_channels * src_h * src_w;
 
-  //chg 测：测一下src_num是多少，结果都是1
-  //std::cout<<"src_num = "<<src_num<<std::endl;
-  //chg 测：看一下ifmap vlolume的样子
-  //std::cout<<"src_h * src_w * src_channels: "<<src_h<<" * "<<src_w<<" * "<<src_channels<<std::endl;
-  //chg 测：看一下stride是多少
-  //std::cout<<"stride = "<<stride_h_<<" * "<<stride_w_<<std::endl;
-
   // chg 改：给硬件函数的输入分配连续内存
-#ifndef SDSOC
-  float* const dst_head =
-	  new float[src_num * dst_size * dst_channels];		// 用来存一层卷积后的结果（output volume）。
-  float* const mat_head =
-	  new float[dst_size * kernel_size];	// 用来存去除了num维度的、与卷积核对应分配的input的元素。
-  //float* const mat_head =
-  //  new float[src_channels * src_h * src_w];  // 用来存ifmap volume。
-#else
-  float* const dst_head =
-	  new float[src_num * dst_size * dst_channels];		// 用来存一层卷积后的结果（output volume）。
-  float* const mat_head =
-	  new float[dst_size * kernel_size];	// 用来存去除了num维度的、与卷积核对应分配的input的元素。
-  //float* const dst_head =
-  //    (float *)sds_alloc(src_num * dst_size * dst_channels * sizeof(float));
-  //float* const mat_head =
-  //      (float *)sds_alloc(dst_size * kernel_size * sizeof(float));
-  //float* const mat_head =
-  //    (float *)sds_alloc(src_channels * src_h * src_w * sizeof(float));
-  //std::cout<<"sds_alloc mat_head & dst_head activated"<<std::endl;
-#endif // SDSOC
+  //cudaPitchedPtr devPtr_ifm;
+  //cudaPitchedPtr devPtr_ofm;
+  //cudaExtent ext_ifm = make_cudaExtent(src_w * sizeof(float), src_h, src_channels);
+  //cudaExtent ext_ofm = make_cudaExtent(dst_w * sizeof(float), dst_h, dst_channels);
+  //cudaMalloc3D(&devPtr_ifm, ext_ifm);
+  //cudaMalloc3D(&devPtr_ofm, ext_ofm);
+  //cudaMemcpy3DParms Parms3Difm = {0};
+  //cudaMemcpy3DParms Parms3Dofm = {0};
 
+  float* dPtr_ifm;
+  float* dPtr_ofm;
+  size_t size_ifm = src_w * src_h * src_channels;
+  size_t size_ofm = dst_w * dst_h * dst_channels;
+  cudaMalloc((void **)&dPtr_ifm, size_ifm * sizeof(float));
+  cudaMalloc((void **)&dPtr_ofm, size_ofm * sizeof(float));
+  float* const dst_head =
+	  new float[src_num * dst_size * dst_channels];		// 用来存一层卷积后的结果（output volume）。
+  float* const mat_head =
+	  new float[dst_size * kernel_size];	// 用来存去除了num维度的、与卷积核对应分配的input的元素。
+
+
+  // chg: const float* src_data = input->data().get();
   const float* src_data = input->data().get();
-  float* dst_data = dst_head;
+  float* dst_data = dPtr_ofm;
   int didx = 0;
 #ifdef __VIPL_LOG__
   scan_time = math_time = 0;
@@ -128,8 +120,8 @@ void ConvNet::Execute() {
     t_start = clock();
 #endif
 
-  // chg 改：双模运行模式对memcpy的改进
-  //if(128*3*3*256 != kernel_size * dst_channels){   //  128*3*3*256 != kernel_size * dst_channels
+  //chg 改：双模运行模式对memcpy的改进
+  if(128*3*3*256 != kernel_size * dst_channels){   //  128*3*3*256 != kernel_size * dst_channels
     float* mat_data = mat_head;
     for (int sh = 0; sh < end_h; sh += stride_h_) {		// 纵向移窗。
       for (int sw = 0; sw < end_w; sw += stride_w_) {	// 横向移窗。
@@ -145,10 +137,11 @@ void ConvNet::Execute() {
       } // for sw
     } // for sh
     src_data += src_num_offset;
-  //}
-  //else{
-  //  memcpy(mat_head, src_data, sizeof(float) * src_num_offset);   // chg 加：直接拷贝ifmap volume的数据。
-  //}
+  }
+  else{
+    cudaMemcpy(dPtr_ifm, src_data, size_ifm * sizeof(float), cudaMemcpyHostToDevice);   // chg 加：直接拷贝ifmap volume的数据。
+  }
+  
 
 #ifdef __VIPL_LOG__
     t_end = clock();
@@ -157,28 +150,31 @@ void ConvNet::Execute() {
     t_start = clock();
 #endif
 
-#ifndef SDSOC
-    const float* weight_head = weight->data().get();
-#else
-    const float* weight_head = weight->data().get();
-    //const float* ptr_temp = weight->data().get();
-    //float* const weight_head = (float *)sds_alloc(kernel_size * dst_channels * sizeof(float));
-    //memcpy(weight_head, ptr_temp, kernel_size * dst_channels * sizeof(float));
-#endif // SDSOC
+  //manage filter memory
+  float* dPtr_weights;
+  size_t size_weights = kernel_size * dst_channels;
+  const float* weight_head = weight->data().get();
+  float* ptr_temp = weight->data().get();
+  cudaMalloc((void **)&dPtr_weights, size_weights * sizeof(float));
+  cudaMemcpy((void **)dPtr_weights, ptr_temp, size_weights*sizeof(float), cudaMemcpyHostToDevice);
 
-    //chg 测：测试一下各层的filter的元素个数
-    //std::cout<<"number of elements in this filter = "<<kernel_size<<" = "
-    //    << src_channels <<"*"<<kernel_h<<"*"<<kernel_w <<std::endl;
-    // chg 加：测试matrix_product运行一次的耗时。
+  if(128*3*3*256 != kernel_size * dst_channels){
     clock_t start_clock, cnt = 0;
     start_clock = clock();
-    matrix_procuct(mat_head, weight_head, dst_data, dst_size, dst_channels,
-      kernel_size, true, false);
+    matrix_procuct(mat_head, weight_head, dst_head, dst_size, dst_channels, kernel_size, true, false);
     cnt = clock() - start_clock;
-    std::cout << "matrix_procuct clock = " << cnt << std::endl;
-#ifdef SDSOC
-    sds_free(weight_head);
-#endif // SDSOC
+    std::cout << "matrix_procuct clock      = " << cnt << std::endl;
+  }
+  else{
+    clock_t start_clock, cnt = 0;
+    start_clock = clock();
+    cuda_wrapper(dPtr_ifm, dPtr_weights, dPtr_ofm, dst_size, dst_channels, kernel_size, true, false);
+    // fetch output-feature-maps from GPU
+    cudaMemcpy(dst_head, dPtr_ofm, size_ofm*sizeof(float), cudaMemcpyDeviceToHost);
+    cnt = clock() - start_clock;
+    std::cout << "cuda_matrix_procuct clock = " << cnt << std::endl;
+    cudaFree(dPtr_weights);
+  }
 
 
 #ifdef __VIPL_LOG__
@@ -194,15 +190,11 @@ void ConvNet::Execute() {
 #endif
   output->CopyData(src_num, dst_channels, dst_h, dst_w, dst_head);
 
-#ifndef SDSOC
   delete[] mat_head;
   delete[] dst_head;
-#else
-  delete[] mat_head;
-  delete[] dst_head;
-  //sds_free(mat_head);
-  //sds_free(dst_head);
-#endif // SDSOC
+  cudaFree(dPtr_ifm);
+  cudaFree(dPtr_ofm);
+
 
   LOG(DEBUG) << "output blob: (" << output->num() << "," << output->channels()
     << "," << output->height() << "," << output->width() << ")";
