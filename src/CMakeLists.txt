@@ -34,7 +34,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES")
 
 file(GLOB SRC 
     "${PROJECT_SOURCE_DIR}/*.cpp"
-    "${PROJECT_SOURCE_DIR}/*.cu"  
+    "${PROJECT_SOURCE_DIR}/*.cu"
 )
 
 cuda_add_executable(GPU-CNN ${SRC})

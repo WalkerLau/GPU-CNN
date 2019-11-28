@@ -96,6 +96,9 @@ void ConvNet::Execute() {
   //cudaMemcpy3DParms Parms3Difm = {0};
   //cudaMemcpy3DParms Parms3Dofm = {0};
 
+  //test Error
+	cudaError_t err;
+
   float* dPtr_ifm;
   float* dPtr_ofm;
   size_t size_ifm = src_w * src_h * src_channels;
@@ -107,6 +110,8 @@ void ConvNet::Execute() {
   float* const mat_head =
 	  new float[dst_size * kernel_size];	// 用来存去除了num维度的、与卷积核对应分配的input的元素。
 
+  //if (err != cudaSuccess) 
+  //    std::cout << "conv_net error in cudaMalloc" << std::endl;
 
   // chg: const float* src_data = input->data().get();
   const float* src_data = input->data().get();
@@ -167,10 +172,12 @@ void ConvNet::Execute() {
   }
   else{
     clock_t start_clock, cnt = 0;
+    cudaDeviceSynchronize();
     start_clock = clock();
-    cuda_wrapper(dPtr_ifm, dPtr_weights, dPtr_ofm, dst_size, dst_channels, kernel_size, true, false);
+    cuda_wrapper(dPtr_ifm, dPtr_weights, dPtr_ofm, dst_size, dst_channels, kernel_size);
     // fetch output-feature-maps from GPU
     cudaMemcpy(dst_head, dPtr_ofm, size_ofm*sizeof(float), cudaMemcpyDeviceToHost);
+    cudaDeviceSynchronize();
     cnt = clock() - start_clock;
     std::cout << "cuda_matrix_procuct clock = " << cnt << std::endl;
     cudaFree(dPtr_weights);

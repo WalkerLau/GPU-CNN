@@ -76,10 +76,10 @@ std::shared_ptr<Net> CommonNet::Load(FILE* file) {
   net->SetUp();		
 
   // chg test---------------------------------------------------------------
-  std::cout << "net type:" << net_type << "\nparams_blobs size is : " << net->params().size() << std::endl;
+  //std::cout << "net type:" << net_type << "\nparams_blobs size is : " << net->params().size() << std::endl;
 
   // chg test---------------------------------------------------------------
-  std::cout << "param loop --- begin " << std::endl;
+  //std::cout << "param loop --- begin " << std::endl;
 
   for (int i = 0; i < net->params().size(); ++ i) {		
     Blob param(file);	
@@ -88,14 +88,14 @@ std::shared_ptr<Net> CommonNet::Load(FILE* file) {
     << param.channels() << "," << param.height() << ","<< param.width() << ")";
 		
 	// chg test---------------------------------------------------------------
-	std::cout << "net blobs[" << i << "]: " << param.num() << ","
-			  << param.channels() << "," << param.height() << "," << param.width() << std::endl;
+	//std::cout << "net blobs[" << i << "]: " << param.num() << ","
+	//		  << param.channels() << "," << param.height() << "," << param.width() << std::endl;
 
 	net->params(i)->SetData(param);		
   }
 
   // chg test---------------------------------------------------------------
-  std::cout << "param loop --- done " << std::endl;
+  //std::cout << "param loop --- done " << std::endl;
 
   int num_subnet = net->nets().size();
   int num_in = net->input_blobs().size();
@@ -110,12 +110,12 @@ std::shared_ptr<Net> CommonNet::Load(FILE* file) {
   for (int i = 0; i < num_subnet; ++ i) {
 
 	// chg test：追踪网络的嵌套情况---------------------------------------------------------------
-	std::cout << "Subnet load --- begin---as index :" << i << std::endl;
+	//std::cout << "Subnet load --- begin---as index :" << i << std::endl;
 
     nets[i] = Load(file);
 
 	// chg test：追踪网络的嵌套情况---------------------------------------------------------------
-	std::cout << "Subnet load --- done ---as index :" << i << std::endl;
+	//std::cout << "Subnet load --- done ---as index :" << i << std::endl;
 
     nets[i]->SetFather(net.get());		
   }

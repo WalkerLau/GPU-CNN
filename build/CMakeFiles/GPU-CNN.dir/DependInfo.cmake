@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/cuda/seeta/src/cfan.cpp" "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/cfan.cpp.o"
   "/cuda/seeta/src/common_net.cpp" "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/common_net.cpp.o"
   "/cuda/seeta/src/conv_net.cpp" "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/conv_net.cpp.o"
+  "/cuda/seeta/src/cudaDevice.cpp" "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o"
   "/cuda/seeta/src/eltwise_net.cpp" "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o"
   "/cuda/seeta/src/face_alignment.cpp" "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o"
   "/cuda/seeta/src/face_detection.cpp" "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/face_detection.cpp.o"

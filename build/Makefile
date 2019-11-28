@@ -312,6 +312,33 @@ conv_net.cpp.s:
 	$(MAKE) -f CMakeFiles/GPU-CNN.dir/build.make CMakeFiles/GPU-CNN.dir/conv_net.cpp.s
 .PHONY : conv_net.cpp.s
 
+cudaDevice.o: cudaDevice.cpp.o
+
+.PHONY : cudaDevice.o
+
+# target to build an object file
+cudaDevice.cpp.o:
+	$(MAKE) -f CMakeFiles/GPU-CNN.dir/build.make CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o
+.PHONY : cudaDevice.cpp.o
+
+cudaDevice.i: cudaDevice.cpp.i
+
+.PHONY : cudaDevice.i
+
+# target to preprocess a source file
+cudaDevice.cpp.i:
+	$(MAKE) -f CMakeFiles/GPU-CNN.dir/build.make CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.i
+.PHONY : cudaDevice.cpp.i
+
+cudaDevice.s: cudaDevice.cpp.s
+
+.PHONY : cudaDevice.s
+
+# target to generate assembly for a file
+cudaDevice.cpp.s:
+	$(MAKE) -f CMakeFiles/GPU-CNN.dir/build.make CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.s
+.PHONY : cudaDevice.cpp.s
+
 eltwise_net.o: eltwise_net.cpp.o
 
 .PHONY : eltwise_net.o
@@ -990,6 +1017,9 @@ help:
 	@echo "... conv_net.o"
 	@echo "... conv_net.i"
 	@echo "... conv_net.s"
+	@echo "... cudaDevice.o"
+	@echo "... cudaDevice.i"
+	@echo "... cudaDevice.s"
 	@echo "... eltwise_net.o"
 	@echo "... eltwise_net.i"
 	@echo "... eltwise_net.s"

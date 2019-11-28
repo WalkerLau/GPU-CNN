@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/GPU-CNN.dir/cfan.cpp.o"
   "CMakeFiles/GPU-CNN.dir/common_net.cpp.o"
   "CMakeFiles/GPU-CNN.dir/conv_net.cpp.o"
+  "CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o"
   "CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o"
   "CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o"
   "CMakeFiles/GPU-CNN.dir/face_detection.cpp.o"

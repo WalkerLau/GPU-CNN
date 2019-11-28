@@ -62,6 +62,8 @@ CMakeFiles/GPU-CNN.dir/conv_net.cpp.o: /cuda/seeta/src/net.h
 CMakeFiles/GPU-CNN.dir/conv_net.cpp.o: /cuda/seeta/src/net_factory.h
 CMakeFiles/GPU-CNN.dir/conv_net.cpp.o: /cuda/seeta/src/viplnet.h
 
+CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o: /cuda/seeta/src/cudaDevice.cpp
+
 CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o: /cuda/seeta/src/blob.h
 CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o: /cuda/seeta/src/eltwise_net.cpp
 CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o: /cuda/seeta/src/eltwise_net.h
@@ -237,6 +239,7 @@ CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o: /cuda/seeta/src/surf_mlp_mod
 CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o: /cuda/seeta/src/surf_mlp_model_reader.h
 
 CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o: /cuda/seeta/src/common.h
+CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o: /cuda/seeta/src/cudaDevice.h
 CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o: /cuda/seeta/src/face_identification.h
 CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o: /cuda/seeta/src/test_face_recognizer.cpp
 CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o: /usr/local/include/opencv4/opencv2/calib3d.hpp

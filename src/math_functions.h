@@ -49,7 +49,7 @@
 #endif
 
 void cuda_wrapper(float* A, float* B, float* C, const int n,
-    const int m, const int k, bool ta = false, bool tb = false);
+    const int m, const int k);
 
 float simd_dot(const float* x, const float* y, const long& len);
 

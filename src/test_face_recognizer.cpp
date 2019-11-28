@@ -85,6 +85,8 @@ using namespace std;
 #include "face_identification.h"
 #include "common.h"
 
+#include "cudaDevice.h"
+
 #include "math.h"
 #include "time.h"
 #include <iostream>
@@ -311,6 +313,9 @@ void TEST(FaceRecognizerTest, ExtractFeatureWithCrop) {
 }
 
 int main(int argc, char* argv[]) {
+
+  // print GPU info
+  PrintGPU();
 
   // chg 删：TEST(FaceRecognizerTest, CropFace);
   TEST(FaceRecognizerTest, ExtractFeature);
