@@ -102,7 +102,7 @@ __host__ void convolute(float* A, float* B, float* C,
 		for(int ofm_lump = 0; ofm_lump < dst_chn/block_num; ++ofm_lump){
 
 			//rearrange B to filters
-			rearrange_B(B, temp, src_w, src_chn, fil_w, ifm_lump, ofm_lump, para_chn, block_num);
+			rearrange_B(B, temp, src_chn, fil_w, ifm_lump, ofm_lump, para_chn, block_num);
 			cudaDeviceSynchronize();
 
 			//get partial sum for block_num ofmaps
@@ -139,7 +139,6 @@ __global__ void rearrange_A(float* A, float* ifmaps,
 
 //rearrange B to filters
 __host__ void rearrange_B(float* B, float* temp,
-	const int src_w   ,
 	const int src_chn ,
 	const int fil_w   ,
 	const int ifm_lump,
@@ -147,7 +146,6 @@ __host__ void rearrange_B(float* B, float* temp,
 	const int para_chn,
 	const int block_num
 	){
-	const int src_h = src_w;
 	const int fil_h = fil_w;
 
 	//int src_off = (ofm_lump*block_num*src_chn + ifm_lump*para_chn)*fil_h*fil_w;
@@ -156,7 +154,6 @@ __host__ void rearrange_B(float* B, float* temp,
 	//	dst_off += fil_h * fil_w * para_chn;
 	//	src_off += src_chn * fil_h * fil_w;
 	//}
-
 	
 	int src_off = (ofm_lump*block_num*src_chn + ifm_lump*para_chn)*fil_h*fil_w;
 	for(int dst_off = 0, blk = 0; blk < block_num; ++blk){

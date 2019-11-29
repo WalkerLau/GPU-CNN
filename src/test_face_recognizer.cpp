@@ -227,7 +227,7 @@ void TEST(FaceRecognizerTest, ExtractFeature) {
   ifs.close();
 
   average_sim /= img_num;
-  if (1.0 - average_sim >  0.01) {
+  if (1.0 - average_sim >  0.1) {
     std::cout<< "average similarity: " << average_sim << std::endl;
   }
   else {

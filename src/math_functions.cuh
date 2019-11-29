@@ -23,7 +23,6 @@ __global__ void rearrange_A(float* A, float* ifmaps,
     );
 
 __host__ void rearrange_B(float* B, float* temp,
-    const int src_w   ,
     const int src_chn ,
     const int fil_w   ,
     const int ifm_lump,
