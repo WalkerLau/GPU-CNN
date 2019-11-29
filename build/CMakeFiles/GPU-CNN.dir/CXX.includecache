@@ -79,6 +79,8 @@ cuda_runtime_api.h
 -
 cuda_runtime.h
 -
+stdio.h
+-
 
 /cuda/seeta/src/math_functions.h
 log.h

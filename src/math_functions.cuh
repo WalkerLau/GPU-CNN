@@ -3,6 +3,7 @@
 
 #include <cuda_runtime_api.h>
 #include <cuda_runtime.h>
+#include <stdio.h>
 
 __host__ void cuda_matrix_procuct(float* A, float* B, float* C, const int n,
     const int m, const int k);
@@ -21,7 +22,7 @@ __global__ void rearrange_A(float* A, float* ifmaps,
     const int ifm_lump
     );
 
-__host__ void rearrange_B(float* B,
+__host__ void rearrange_B(float* B, float* temp,
     const int src_w   ,
     const int src_chn ,
     const int fil_w   ,

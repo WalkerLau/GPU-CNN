@@ -96,9 +96,6 @@ void ConvNet::Execute() {
   //cudaMemcpy3DParms Parms3Difm = {0};
   //cudaMemcpy3DParms Parms3Dofm = {0};
 
-  //test Error
-	cudaError_t err;
-
   float* dPtr_ifm;
   float* dPtr_ofm;
   size_t size_ifm = src_w * src_h * src_channels;
@@ -109,9 +106,6 @@ void ConvNet::Execute() {
 	  new float[src_num * dst_size * dst_channels];		// 用来存一层卷积后的结果（output volume）。
   float* const mat_head =
 	  new float[dst_size * kernel_size];	// 用来存去除了num维度的、与卷积核对应分配的input的元素。
-
-  //if (err != cudaSuccess) 
-  //    std::cout << "conv_net error in cudaMalloc" << std::endl;
 
   // chg: const float* src_data = input->data().get();
   const float* src_data = input->data().get();

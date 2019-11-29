@@ -78,45 +78,42 @@ __host__ void convolute(float* A, float* B, float* C,
 	
 	//cuda_Grid params
 	const int para_chn = 1;
-	const int block_num = 16;
+	const int block_num = 1;
 	dim3 dimGrid(1,1,block_num);
 	dim3 dimBlock(src_w, src_h, para_chn);
 
 	//create new space to store rearranged A
-	//chg 
-	cudaError_t err;
 	float* ifmaps;
-	err = cudaMalloc((void **)&ifmaps, sizeof(float)*para_chn*src_h*src_w);
-	if (err != cudaSuccess){
-		std::cout << "error in cudaMalloc" << std::endl;
-		std::cout << "error in cudaMalloc is: " << cudaGetErrorString(err) << std::endl;
-	}
+	cudaMalloc((void **)&ifmaps, sizeof(float)*para_chn*src_h*src_w);
+
+	//create temp space to store rearranged B
+	float* temp;
+	cudaMalloc((void **)&temp, sizeof(float) * block_num * para_chn * fil_h * fil_w);
 
 	//initiate C to be zeros
 	cudaMemset(C, 0, sizeof(float)*dst_chn*dst_h*dst_w);
 
 	//get the whole ofmaps volume
 	for(int ifm_lump = 0; ifm_lump < src_chn/para_chn; ++ifm_lump){
+		
 		//rearrange A to ifmaps
-		rearrange_A<<<1,dimBlock>>>(A, ifmaps, src_w, para_chn, ifm_lump);		
+		rearrange_A<<<1,dimBlock>>>(A, ifmaps, src_w, para_chn, ifm_lump);
+		
 		for(int ofm_lump = 0; ofm_lump < dst_chn/block_num; ++ofm_lump){
+
 			//rearrange B to filters
-			rearrange_B(B, src_w, src_chn, fil_w, ifm_lump, ofm_lump, para_chn, block_num);
+			rearrange_B(B, temp, src_w, src_chn, fil_w, ifm_lump, ofm_lump, para_chn, block_num);
+			cudaDeviceSynchronize();
+
 			//get partial sum for block_num ofmaps
 			conv_grid<<<dimGrid, dimBlock>>>
 				(ifmaps, C, src_w, fil_w, dst_w, ofm_lump, para_chn, block_num);
+			cudaDeviceSynchronize();
+			
 		}
 	}
-
-	//chg
-	//cudaMemset(ifmaps, 1234, sizeof(float)*3);
-	float ifm_test[3] = {1,2,3};
-	err = cudaMemcpy(ifm_test, ifmaps, sizeof(float)*3, cudaMemcpyDeviceToHost);
-    std::cout << cudaGetErrorString(err) << std::endl;
-	for(int i= 0;i<3;++i)
-	std::cout << "ifm_test : "<<ifm_test[i]<<std::endl; 
-
 	//free
+	cudaFree(temp);
 	cudaFree(ifmaps);
 }
 
@@ -129,24 +126,19 @@ __global__ void rearrange_A(float* A, float* ifmaps,
 	const int src_h = src_w;
 	
 	//grid index
-	//int bz = blockIdx.z;  int by = blockIdx.y;  int bx = blockIdx.x;
-	//int tz = threadIdx.z; int ty = threadIdx.y; int tx = threadIdx.x;
-	//int widx = bx*blockDim.x + tx;
-	//int hidx = by*blockDim.y + ty;
-	//int cidx = bz*blockDim.z + tz; 
-	//ifmaps[cidx*src_h*src_w + hidx*src_w + widx] = 
-	//		A[(ifm_lump*para_chn + cidx)*src_h*src_w + hidx*src_w + widx];
-	//__syncthreads();
-	
-	//chg
-	for(int i = 0; i < para_chn*src_h*src_w; ++i){
-		ifmaps[i] = 13.14;
-	}
+	int bz = blockIdx.z;  int by = blockIdx.y;  int bx = blockIdx.x;
+	int tz = threadIdx.z; int ty = threadIdx.y; int tx = threadIdx.x;
+	int widx = bx*blockDim.x + tx;
+	int hidx = by*blockDim.y + ty;
+	int cidx = bz*blockDim.z + tz; 
+	ifmaps[cidx*src_h*src_w + hidx*src_w + widx] = 
+			A[(ifm_lump*para_chn + cidx)*src_h*src_w + hidx*src_w + widx];
+	__syncthreads();
 
 }
 
 //rearrange B to filters
-__host__ void rearrange_B(float* B,
+__host__ void rearrange_B(float* B, float* temp,
 	const int src_w   ,
 	const int src_chn ,
 	const int fil_w   ,
@@ -158,13 +150,23 @@ __host__ void rearrange_B(float* B,
 	const int src_h = src_w;
 	const int fil_h = fil_w;
 
+	//int src_off = (ofm_lump*block_num*src_chn + ifm_lump*para_chn)*fil_h*fil_w;
+	//for(int dst_off = 0, blk = 0; blk < block_num; ++blk){
+	//	cudaMemcpyToSymbol(filters + dst_off, B + src_off, sizeof(float)*fil_h*fil_w*para_chn);
+	//	dst_off += fil_h * fil_w * para_chn;
+	//	src_off += src_chn * fil_h * fil_w;
+	//}
+
+	
 	int src_off = (ofm_lump*block_num*src_chn + ifm_lump*para_chn)*fil_h*fil_w;
 	for(int dst_off = 0, blk = 0; blk < block_num; ++blk){
-		cudaMemcpyToSymbol(filters + dst_off, B + src_off, sizeof(float)*fil_h*fil_w*para_chn);
+		cudaMemcpy(temp + dst_off, B + src_off, sizeof(float)*fil_h*fil_w*para_chn, cudaMemcpyDeviceToDevice);
 		dst_off += fil_h * fil_w * para_chn;
 		src_off += src_chn * fil_h * fil_w;
 	}
-	
+
+	cudaMemcpyToSymbol(filters, temp, sizeof(float) * block_num * para_chn * fil_h * fil_w);
+
 }
 
 //get partial sum for block_num ofmaps

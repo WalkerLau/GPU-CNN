@@ -257,7 +257,7 @@ CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /cuda/seeta/src/ma
 
 CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o: CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building NVCC intermediate link file CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o"
-	/usr/bin/nvcc -gencode arch=compute_20,code=sm_20 -gencode arch=compute_20,code=sm_21 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_50,code=compute_50 -rdc=true -m64 -ccbin /usr/bin/cc -dlink /cuda/seeta/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o -o /cuda/seeta/build/CMakeFiles/GPU-CNN.dir/./GPU-CNN_intermediate_link.o
+	/usr/bin/nvcc -gencode arch=compute_20,code=sm_20 -gencode arch=compute_20,code=sm_21 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -rdc=true -m64 -ccbin /usr/bin/cc -dlink /cuda/seeta/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o -o /cuda/seeta/build/CMakeFiles/GPU-CNN.dir/./GPU-CNN_intermediate_link.o
 
 CMakeFiles/GPU-CNN.dir/aligner.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
 CMakeFiles/GPU-CNN.dir/aligner.cpp.o: /cuda/seeta/src/aligner.cpp
