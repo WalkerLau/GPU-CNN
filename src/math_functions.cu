@@ -16,7 +16,7 @@ __host__ void cuda_wrapper(float* A, float* B, float* C, const int n,
 
 //allocate constant memory for filters
 //assume that cuda_Grid has 16 blocks while max{para_chn} = 4, max{fil_w} = 9
-__constant__ float filters[16*4*9*9];
+//__constant__ float filters[16*4*9*9];
 
 // Match conv_layers
 // matrix_procuct的输入分别为：输入数据首地址A、权重数据首地址B、输出数据首地址C、ofmap平面元素数量n、
@@ -78,7 +78,7 @@ __host__ void convolute(float* A, float* B, float* C,
 	
 	//cuda_Grid params
 	const int para_chn = 1;
-	const int block_num = 1;
+	const int block_num = 32;
 	dim3 dimGrid(1,1,block_num);
 	dim3 dimBlock(src_w, src_h, para_chn);
 
@@ -86,9 +86,9 @@ __host__ void convolute(float* A, float* B, float* C,
 	float* ifmaps;
 	cudaMalloc((void **)&ifmaps, sizeof(float)*para_chn*src_h*src_w);
 
-	//create temp space to store rearranged B
-	float* temp;
-	cudaMalloc((void **)&temp, sizeof(float) * block_num * para_chn * fil_h * fil_w);
+	//create new space to store rearranged B
+	float* filters;
+	cudaMalloc((void **)&filters, sizeof(float) * block_num * para_chn * fil_h * fil_w);
 
 	//initiate C to be zeros
 	cudaMemset(C, 0, sizeof(float)*dst_chn*dst_h*dst_w);
@@ -102,18 +102,17 @@ __host__ void convolute(float* A, float* B, float* C,
 		for(int ofm_lump = 0; ofm_lump < dst_chn/block_num; ++ofm_lump){
 
 			//rearrange B to filters
-			rearrange_B(B, temp, src_chn, fil_w, ifm_lump, ofm_lump, para_chn, block_num);
-			cudaDeviceSynchronize();
+			rearrange_B<<<dimGrid, dimBlock>>>(B, filters, src_chn, fil_w, ifm_lump, ofm_lump, para_chn, block_num);
 
 			//get partial sum for block_num ofmaps
 			conv_grid<<<dimGrid, dimBlock>>>
-				(ifmaps, C, src_w, fil_w, dst_w, ofm_lump, para_chn, block_num);
+				(ifmaps, filters, C, src_w, fil_w, dst_w, ofm_lump, para_chn, block_num);
 			cudaDeviceSynchronize();
 			
 		}
 	}
 	//free
-	cudaFree(temp);
+	cudaFree(filters);
 	cudaFree(ifmaps);
 }
 
@@ -138,7 +137,7 @@ __global__ void rearrange_A(float* A, float* ifmaps,
 }
 
 //rearrange B to filters
-__host__ void rearrange_B(float* B, float* temp,
+__global__ void rearrange_B(float* B, float* filters,
 	const int src_chn ,
 	const int fil_w   ,
 	const int ifm_lump,
@@ -154,21 +153,32 @@ __host__ void rearrange_B(float* B, float* temp,
 	//	dst_off += fil_h * fil_w * para_chn;
 	//	src_off += src_chn * fil_h * fil_w;
 	//}
+
+	//int src_off = (ofm_lump*block_num*src_chn + ifm_lump*para_chn)*fil_h*fil_w;
+	//for(int dst_off = 0, blk = 0; blk < block_num; ++blk){
+	//	cudaMemcpy(temp + dst_off, B + src_off, sizeof(float)*fil_h*fil_w*para_chn, cudaMemcpyDeviceToDevice);
+	//	dst_off += fil_h * fil_w * para_chn;
+	//	src_off += src_chn * fil_h * fil_w;
+	//}
+	//
+	//cudaMemcpyToSymbol(filters, temp, sizeof(float) * block_num * para_chn * fil_h * fil_w);
+
+	//grid index
+	int bz = blockIdx.z;  
+	int tz = threadIdx.z; int ty = threadIdx.y; int tx = threadIdx.x;
 	
-	int src_off = (ofm_lump*block_num*src_chn + ifm_lump*para_chn)*fil_h*fil_w;
-	for(int dst_off = 0, blk = 0; blk < block_num; ++blk){
-		cudaMemcpy(temp + dst_off, B + src_off, sizeof(float)*fil_h*fil_w*para_chn, cudaMemcpyDeviceToDevice);
-		dst_off += fil_h * fil_w * para_chn;
-		src_off += src_chn * fil_h * fil_w;
+	if( tx < fil_w && ty < fil_h && tz < para_chn){
+		filters[ (bz * para_chn + tz) * fil_h * fil_w + ty * fil_w + tx] = 
+			B[ (ofm_lump*block_num*src_chn + ifm_lump*para_chn + bz * src_chn + tz) * fil_h * fil_w + ty * fil_w + tx ];
 	}
 
-	cudaMemcpyToSymbol(filters, temp, sizeof(float) * block_num * para_chn * fil_h * fil_w);
+	__syncthreads();
 
 }
 
 //get partial sum for block_num ofmaps
 //only for stride = 1
-__global__ void conv_grid(float* A, float*C,
+__global__ void conv_grid(float* A, float* filters, float*C,
 	const int src_w   ,
 	const int fil_w   ,
 	const int dst_w   ,
@@ -194,7 +204,7 @@ __global__ void conv_grid(float* A, float*C,
 	__shared__ float ofmaps[1][15][15];
 
 	//A was re-arranged before conv_grid
-	ifmaps[cidx][hidx][widx] = A[tz*src_h*src_w + ty*src_w + tx];
+	ifmaps[tz][ty][tx] = A[tz*src_h*src_w + ty*src_w + tx];
 	__syncthreads();
 
 	//calculate partial sum 
@@ -203,33 +213,75 @@ __global__ void conv_grid(float* A, float*C,
 		for(int j = 0; j < fil_w; ++j){
 			if( (widx - j) >= 0 && (hidx - i) >= 0){
 				//filters was re-arranged as continuous
-				ofmaps[cidx][hidx][widx] = ifmaps[cidx][hidx][widx] * 
+				ofmaps[tz][ty][tx] = ifmaps[tz][ty][tx] * 
 										   filters[cidx * fil_h * fil_w + ((hidx-i) % fil_h) * fil_w + (widx-j) % fil_w];
 				__syncthreads();
 				if( widx%fil_w == j){
 					for(int k = 1; k < fil_w; ++k){
-						ofmaps[cidx][hidx][widx] += ofmaps[cidx][hidx][widx+k];
+						ofmaps[tz][ty][tx] += ofmaps[tz][ty][tx + k];
 					}
 				}
 				__syncthreads();
 				if( hidx%fil_h == i){
 					for(int k = 1; k < fil_h; ++k){
-						ofmaps[cidx][hidx][widx] += ofmaps[cidx][hidx+k][widx];
+						ofmaps[tz][ty][tx] += ofmaps[tz][ty + k][tx];
 					}
 				}
 				__syncthreads();
 				if( cidx%blockDim.z == 0){
 					for(int k = 1; k < blockDim.z; ++k){
-						ofmaps[cidx][hidx][widx] += ofmaps[cidx+k][hidx][widx];
+						ofmaps[tz][ty][tx] += ofmaps[tz + k][ty][tx];
 					}
 				}
 				__syncthreads();
 				if( (cidx%blockDim.z) == 0 && (hidx%fil_h) == i && (widx%fil_w) == j){
-					C[(ofm_lump*block_num + cidx/blockDim.z)*dst_h*dst_w + hidx*dst_w + widx] += ofmaps[cidx][hidx][widx];
+					C[(ofm_lump*block_num + cidx/blockDim.z)*dst_h*dst_w + hidx*dst_w + widx] += ofmaps[tz][ty][tx];
 				}
 				__syncthreads();
 			}
 		}
 	}
+
+
+
+	////A was re-arranged before conv_grid
+	//ifmaps[cidx][hidx][widx] = A[tz*src_h*src_w + ty*src_w + tx];
+	//__syncthreads();
+	//
+	////calculate partial sum 
+	////stride = 1
+	//for(int i = 0; i < fil_h; ++i){
+	//	for(int j = 0; j < fil_w; ++j){
+	//		if( (widx - j) >= 0 && (hidx - i) >= 0){
+	//			//filters was re-arranged as continuous
+	//			ofmaps[cidx][hidx][widx] = ifmaps[cidx][hidx][widx] * 
+	//									   filters[cidx * fil_h * fil_w + ((hidx-i) % fil_h) * fil_w + (widx-j) % fil_w];
+	//			__syncthreads();
+	//			if( widx%fil_w == j){
+	//				for(int k = 1; k < fil_w; ++k){
+	//					ofmaps[cidx][hidx][widx] += ofmaps[cidx][hidx][widx+k];
+	//				}
+	//			}
+	//			__syncthreads();
+	//			if( hidx%fil_h == i){
+	//				for(int k = 1; k < fil_h; ++k){
+	//					ofmaps[cidx][hidx][widx] += ofmaps[cidx][hidx+k][widx];
+	//				}
+	//			}
+	//			__syncthreads();
+	//			if( cidx%blockDim.z == 0){
+	//				for(int k = 1; k < blockDim.z; ++k){
+	//					ofmaps[cidx][hidx][widx] += ofmaps[cidx+k][hidx][widx];
+	//				}
+	//			}
+	//			__syncthreads();
+	//			if( (cidx%blockDim.z) == 0 && (hidx%fil_h) == i && (widx%fil_w) == j){
+	//				C[(ofm_lump*block_num + cidx/blockDim.z)*dst_h*dst_w + hidx*dst_w + widx] += ofmaps[cidx][hidx][widx];
+	//			}
+	//			__syncthreads();
+	//		}
+	//	}
+	//}
+
 
 }

@@ -22,7 +22,7 @@ __global__ void rearrange_A(float* A, float* ifmaps,
     const int ifm_lump
     );
 
-__host__ void rearrange_B(float* B, float* temp,
+__global__ void rearrange_B(float* B, float* filters,
     const int src_chn ,
     const int fil_w   ,
     const int ifm_lump,
@@ -31,7 +31,7 @@ __host__ void rearrange_B(float* B, float* temp,
     const int block_num
     );
 
-__global__ void conv_grid(float* A, float*C,
+__global__ void conv_grid(float* A, float* filters, float*C,
     const int src_w   ,
     const int fil_w   ,
     const int dst_w   ,
