@@ -126,6 +126,7 @@ CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/chann
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/common_functions.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/ctype.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/cuda_device_runtime_api.h
+CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/cuda_fp16.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/cuda_runtime.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/cuda_runtime_api.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/cuda_surface_types.h

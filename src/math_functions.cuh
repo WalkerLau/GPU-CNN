@@ -5,6 +5,9 @@
 #include <cuda_runtime.h>
 #include <stdio.h>
 
+#include <cuda_fp16.h>
+typedef float data_t;
+
 __host__ void cuda_matrix_procuct(float* A, float* B, float* C, const int n,
     const int m, const int k);
 
@@ -16,13 +19,13 @@ __host__ void convolute(float* A, float* B, float* C,
     const int dst_w   ,
     const int dst_chn);
 
-__global__ void rearrange_A(float* A, float* ifmaps, 
+__global__ void rearrange_A(float* A, data_t* ifmaps, 
     const int src_w,
     const int para_chn,
     const int ifm_lump
     );
 
-__global__ void rearrange_B(float* B, float* filters,
+__global__ void rearrange_B(float* B, data_t* filters,
     const int src_chn ,
     const int fil_w   ,
     const int ifm_lump,
@@ -31,7 +34,7 @@ __global__ void rearrange_B(float* B, float* filters,
     const int block_num
     );
 
-__global__ void conv_grid(float* A, float* filters, float*C,
+__global__ void conv_grid(data_t* A, data_t* filters, float*C,
     const int src_w   ,
     const int fil_w   ,
     const int dst_w   ,

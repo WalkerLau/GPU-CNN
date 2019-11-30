@@ -81,6 +81,8 @@ cuda_runtime.h
 -
 stdio.h
 -
+cuda_fp16.h
+-
 
 /cuda/seeta/src/math_functions.h
 log.h

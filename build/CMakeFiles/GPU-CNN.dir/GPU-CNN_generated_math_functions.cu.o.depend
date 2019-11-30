@@ -69,6 +69,7 @@ SET(CUDA_NVCC_DEPEND
  "/usr/include/common_functions.h"
  "/usr/include/ctype.h"
  "/usr/include/cuda_device_runtime_api.h"
+ "/usr/include/cuda_fp16.h"
  "/usr/include/cuda_runtime.h"
  "/usr/include/cuda_runtime_api.h"
  "/usr/include/cuda_surface_types.h"
