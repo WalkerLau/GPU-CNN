@@ -34,7 +34,7 @@ __global__ void rearrange_B(float* B, data_t* filters,
     const int block_num
     );
 
-__global__ void conv_grid(data_t* A, data_t* filters, float*C,
+__global__ void conv_grid(data_t* A, float* C,
     const int src_w   ,
     const int fil_w   ,
     const int dst_w   ,
