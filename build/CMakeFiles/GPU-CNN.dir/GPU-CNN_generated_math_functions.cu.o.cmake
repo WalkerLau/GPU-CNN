@@ -58,18 +58,18 @@ endif()
 
 # Set these up as variables to make reading the generated file easier
 set(CMAKE_COMMAND "/usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake") # path
-set(source_file "/cuda/seeta/src/math_functions.cu") # path
-set(NVCC_generated_dependency_file "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir//GPU-CNN_generated_math_functions.cu.o.NVCC-depend") # path
-set(cmake_dependency_file "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir//GPU-CNN_generated_math_functions.cu.o.depend") # path
+set(source_file "/cuda/GPU-CNN/src/math_functions.cu") # path
+set(NVCC_generated_dependency_file "/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//GPU-CNN_generated_math_functions.cu.o.NVCC-depend") # path
+set(cmake_dependency_file "/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//GPU-CNN_generated_math_functions.cu.o.depend") # path
 set(CUDA_make2cmake "/usr/local/lib/python3.5/dist-packages/cmake/data/share/cmake-3.13/Modules/FindCUDA/make2cmake.cmake") # path
 set(CUDA_parse_cubin "/usr/local/lib/python3.5/dist-packages/cmake/data/share/cmake-3.13/Modules/FindCUDA/parse_cubin.cmake") # path
 set(build_cubin OFF) # bool
 set(CUDA_HOST_COMPILER "/usr/bin/cc") # path
 # We won't actually use these variables for now, but we need to set this, in
 # order to force this file to be run again if it changes.
-set(generated_file_path "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir//.") # path
-set(generated_file_internal "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o") # path
-set(generated_cubin_file_internal "/cuda/seeta/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o.cubin.txt") # path
+set(generated_file_path "/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//.") # path
+set(generated_file_internal "/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o") # path
+set(generated_cubin_file_internal "/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o.cubin.txt") # path
 
 set(CUDA_NVCC_EXECUTABLE "/usr/bin/nvcc") # path
 set(CUDA_NVCC_FLAGS -gencode;arch=compute_20,code=sm_20;-gencode;arch=compute_20,code=sm_21;-gencode;arch=compute_30,code=sm_30;-gencode;arch=compute_35,code=sm_35;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_52,code=sm_52;-rdc=true ;; ) # list
@@ -79,7 +79,7 @@ set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
 set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64) # list
-set(CUDA_NVCC_INCLUDE_DIRS "/usr/include;/usr/include;/cuda/seeta/src;/usr/local/include/opencv4;/usr/include;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4") # list (needs to be in quotes to handle spaces properly).
+set(CUDA_NVCC_INCLUDE_DIRS "/usr/include;/usr/include;/cuda/GPU-CNN/src;/usr/local/include/opencv4;/usr/include;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4;/usr/local/include/opencv4") # list (needs to be in quotes to handle spaces properly).
 set(CUDA_NVCC_COMPILE_DEFINITIONS [==[]==]) # list (needs to be in lua quotes see #16510 ).
 set(format_flag "-dc") # string
 set(cuda_language_flag ) # list

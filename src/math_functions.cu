@@ -15,8 +15,8 @@ __host__ void cuda_wrapper(float* A, float* B, float* C, const int n,
 }
 
 //allocate constant memory for filters
-//assume that cuda_Grid has max{blocks} = 64, max{para_chn} = 4, max{fil_w} = 3
-__constant__ data_t filters[64*4*3*3];
+//assume that cuda_Grid has max{blocks} = 256, max{para_chn} = 4, max{fil_w} = 3
+//__constant__ data_t filters[256*4*3*3];
 
 // Match conv_layers
 // matrix_procuct的输入分别为：输入数据首地址A、权重数据首地址B、输出数据首地址C、ofmap平面元素数量n、
@@ -78,17 +78,18 @@ __host__ void convolute(float* A, float* B, float* C,
 	
 	//cuda_Grid params
 	const int para_chn = 4;		//should also modify ifmaps size in conv_grid
-	const int block_num = 32;
+	const int block_num = 256;
 	dim3 dimGrid(1,1,block_num);
-	dim3 dimBlock(src_w, src_h, para_chn);
+	dim3 dimBlock(fil_w, fil_h, para_chn);
+	dim3 dimBlock_RA(src_w, src_h, para_chn);
 
 	//create new space to store rearranged A
 	data_t* ifmaps;
-	cudaMalloc((void **)&ifmaps, sizeof(data_t)*para_chn*src_h*src_w);
+	cudaMalloc((void **)&ifmaps, sizeof(data_t)* block_num * para_chn * src_h * src_w);
 
 	//create new space to store rearranged B
-	data_t* temp;
-	cudaMalloc((void **)&temp, sizeof(data_t) * block_num * para_chn * fil_h * fil_w);
+	data_t* filters;
+	cudaMalloc((void **)&filters, sizeof(data_t) * block_num * para_chn * fil_h * fil_w);
 
 	//initiate C to be zeros
 	cudaMemset(C, 0, sizeof(float)*dst_chn*dst_h*dst_w);
@@ -97,17 +98,17 @@ __host__ void convolute(float* A, float* B, float* C,
 	for(int ifm_lump = 0; ifm_lump < src_chn/para_chn; ++ifm_lump){
 		
 		//rearrange A to ifmaps
-		rearrange_A<<<1,dimBlock>>>(A, ifmaps, src_w, para_chn, ifm_lump);
+		rearrange_A<<<1,dimBlock_RA>>>(A, ifmaps, src_w, para_chn, ifm_lump, block_num);
 		
 		for(int ofm_lump = 0; ofm_lump < dst_chn/block_num; ++ofm_lump){
 
-			//rearrange B to temp, and cpy it to filters
-			rearrange_B<<<dimGrid, dimBlock>>>(B, temp, src_chn, fil_w, ifm_lump, ofm_lump, para_chn, block_num);
-			cudaMemcpyToSymbol(filters, temp, sizeof(data_t) * block_num * para_chn * fil_h * fil_w);
+			//rearrange B to filters
+			rearrange_B<<<dimGrid, dimBlock>>>(B, filters, src_chn, fil_w, ifm_lump, ofm_lump, para_chn, block_num);
+			//cudaMemcpyToSymbol(filters, temp, sizeof(data_t) * block_num * para_chn * fil_h * fil_w);
 
 			//get partial sum for block_num ofmaps
 			conv_grid<<<dimGrid, dimBlock>>>
-				(ifmaps, C, src_w, fil_w, dst_w, ofm_lump, para_chn, block_num);
+				(ifmaps, filters, C, src_w, fil_w, dst_w, ofm_lump, para_chn, block_num, stride);
 			
 		}
 	}
@@ -120,7 +121,8 @@ __host__ void convolute(float* A, float* B, float* C,
 __global__ void rearrange_A(float* A, data_t* ifmaps, 
 	const int src_w,
 	const int para_chn,
-	const int ifm_lump
+	const int ifm_lump,
+	const int block_num
 	){
 	const int src_h = src_w;
 	
@@ -130,10 +132,18 @@ __global__ void rearrange_A(float* A, data_t* ifmaps,
 	int widx = bx*blockDim.x + tx;
 	int hidx = by*blockDim.y + ty;
 	int cidx = bz*blockDim.z + tz; 
-	ifmaps[cidx*src_h*src_w + hidx*src_w + widx] = 
-		A[(ifm_lump*para_chn + cidx)*src_h*src_w + hidx*src_w + widx];
-		//__float2half(A[(ifm_lump*para_chn + cidx)*src_h*src_w + hidx*src_w + widx]);
-	__syncthreads();
+
+	for(int i = 0, offset = 0; i < block_num; ++i){
+		ifmaps[offset + cidx*src_h*src_w + hidx*src_w + widx] = 
+			A[(ifm_lump*para_chn + cidx)*src_h*src_w + hidx*src_w + widx];
+		__syncthreads();	
+		offset += para_chn *  src_h * src_w;
+	}
+
+	//ifmaps[cidx*src_h*src_w + hidx*src_w + widx] = 
+	//	A[(ifm_lump*para_chn + cidx)*src_h*src_w + hidx*src_w + widx];
+	//	//__float2half(A[(ifm_lump*para_chn + cidx)*src_h*src_w + hidx*src_w + widx]);
+	//__syncthreads();
 
 }
 
@@ -180,13 +190,14 @@ __global__ void rearrange_B(float* B, data_t* filters,
 
 //get partial sum for block_num ofmaps
 //only for stride = 1
-__global__ void conv_grid(data_t* A, float*C,
+__global__ void conv_grid(data_t* A, float* filters, float*C,
 	const int src_w   ,
 	const int fil_w   ,
 	const int dst_w   ,
 	const int ofm_lump,
 	const int para_chn,
-	const int block_num
+	const int block_num,
+	const int stride
 	){
 	//con_layer params
 	const int src_h = src_w;
@@ -194,12 +205,62 @@ __global__ void conv_grid(data_t* A, float*C,
 	const int dst_h = dst_w;
  
 	//grid index
-	int bz = blockIdx.z;  int by = blockIdx.y;  int bx = blockIdx.x;
+	int bz = blockIdx.z;  //int by = blockIdx.y;  int bx = blockIdx.x;
 	int tz = threadIdx.z; int ty = threadIdx.y; int tx = threadIdx.x;
-	int widx = bx*blockDim.x + tx;
-	int hidx = by*blockDim.y + ty;
-	int cidx = bz*blockDim.z + tz; 
+	//int widx = bx*blockDim.x + tx;
+	//int hidx = by*blockDim.y + ty;
+	//int cidx = bz*blockDim.z + tz; 
 
+	//allocate shared memory
+	//[para_chn][fil_h][fil_w]
+	__shared__ data_t ifmaps[4][3][3];
+	__shared__ float  filtem[4][3][3];
+	__shared__ float     res[4][3][3];
+
+	//load filtem
+	filtem[tz][ty][tx] = filters[(bz*para_chn + tz)*fil_h*fil_w + ty*fil_w + tx];
+	__syncthreads();
+
+	//sliding window
+	for(int h = 0; h < dst_h; ++h){
+		for(int w = 0; w < dst_w; ++w){
+			//load ifmaps
+			ifmaps[tz][ty][tx] = A[(bz*para_chn + tz)*src_h*src_w + (h*stride + ty)*src_w + (w*stride + tx)];
+			__syncthreads();
+
+			//calculate ofmap element
+			res[tz][ty][tx] = ifmaps[tz][ty][tx] * filtem[tz][ty][tx];
+			__syncthreads();
+			if(0 == tx){
+				for(int k = 1; k < fil_w; ++k){
+					res[tz][ty][tx] += res[tz][ty][tx + k];
+				}
+			}	
+			__syncthreads();
+			if(0 == ty && 0 == tx){
+				for(int k = 1; k < fil_h; ++k){
+					res[tz][ty][tx] += res[tz][ty + k][tx];
+				}
+			}
+			__syncthreads();
+			if(0 == tz && 0 == ty && 0 == tx){
+				for(int k = 1; k < para_chn; ++k){
+					res[tz][ty][tx] += res[tz + k][ty][tx];
+				}
+			}
+			__syncthreads();
+
+			//store result to C
+			if(0 == tz && 0 == ty && 0 == tx){
+				C[(ofm_lump*block_num + bz)*dst_h*dst_w + h*dst_w + w] += res[tz][ty][tx];
+			}
+			__syncthreads();
+
+		}
+	}
+
+
+	/*
 	//allocate shared memory
 	//[para_chn][src_h][src_w]
 	__shared__ data_t ifmaps[4][15][15];
@@ -247,6 +308,7 @@ __global__ void conv_grid(data_t* A, float*C,
 			}
 		}
 	}
+	*/
 
 
 }

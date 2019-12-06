@@ -12,7 +12,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.13.3/CMakeSystem.cmake"
   "CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o.cmake.pre-gen"
   "CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o.depend"
-  "/cuda/seeta/src/CMakeLists.txt"
+  "/cuda/GPU-CNN/src/CMakeLists.txt"
   "/usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake"
   "/usr/local/lib/cmake/opencv4/OpenCVConfig.cmake"
   "/usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake"

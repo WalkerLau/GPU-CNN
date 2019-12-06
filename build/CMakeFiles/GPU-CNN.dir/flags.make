@@ -6,5 +6,5 @@ CXX_FLAGS =  -O3 -g -rdynamic -D_FORCE_INLINES   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/cuda/seeta/src -isystem /usr/local/include/opencv4 
+CXX_INCLUDES = -I/cuda/GPU-CNN/src -isystem /usr/local/include/opencv4 
 

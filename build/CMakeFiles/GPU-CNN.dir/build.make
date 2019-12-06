@@ -43,10 +43,10 @@ RM = /usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cuda/seeta/src
+CMAKE_SOURCE_DIR = /cuda/GPU-CNN/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cuda/seeta/build
+CMAKE_BINARY_DIR = /cuda/GPU-CNN/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/GPU-CNN.dir/depend.make
@@ -57,8 +57,8 @@ include CMakeFiles/GPU-CNN.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/GPU-CNN.dir/flags.make
 
-CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /cuda/seeta/src/math_functions.cu
-CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /cuda/seeta/src/math_functions.cuh
+CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /cuda/GPU-CNN/src/math_functions.cu
+CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /cuda/GPU-CNN/src/math_functions.cuh
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/_G_config.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/alloca.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/include/assert.h
@@ -251,430 +251,430 @@ CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/lib/gcc/x86_6
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h
 CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o.cmake
-CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /cuda/seeta/src/math_functions.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building NVCC (Device) object CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o"
-	cd /cuda/seeta/build/CMakeFiles/GPU-CNN.dir && /usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -E make_directory /cuda/seeta/build/CMakeFiles/GPU-CNN.dir//.
-	cd /cuda/seeta/build/CMakeFiles/GPU-CNN.dir && /usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING= -D generated_file:STRING=/cuda/seeta/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o -D generated_cubin_file:STRING=/cuda/seeta/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o.cubin.txt -P /cuda/seeta/build/CMakeFiles/GPU-CNN.dir//GPU-CNN_generated_math_functions.cu.o.cmake
+CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o: /cuda/GPU-CNN/src/math_functions.cu
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building NVCC (Device) object CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o"
+	cd /cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir && /usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -E make_directory /cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//.
+	cd /cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir && /usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING= -D generated_file:STRING=/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o -D generated_cubin_file:STRING=/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o.cubin.txt -P /cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//GPU-CNN_generated_math_functions.cu.o.cmake
 
 CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o: CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building NVCC intermediate link file CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o"
-	/usr/bin/nvcc -gencode arch=compute_20,code=sm_20 -gencode arch=compute_20,code=sm_21 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -rdc=true -m64 -ccbin /usr/bin/cc -dlink /cuda/seeta/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o -o /cuda/seeta/build/CMakeFiles/GPU-CNN.dir/./GPU-CNN_intermediate_link.o
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building NVCC intermediate link file CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o"
+	/usr/bin/nvcc -gencode arch=compute_20,code=sm_20 -gencode arch=compute_20,code=sm_21 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -rdc=true -m64 -ccbin /usr/bin/cc -dlink /cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir//./GPU-CNN_generated_math_functions.cu.o -o /cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir/./GPU-CNN_intermediate_link.o
 
 CMakeFiles/GPU-CNN.dir/aligner.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/aligner.cpp.o: /cuda/seeta/src/aligner.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/GPU-CNN.dir/aligner.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/aligner.cpp.o -c /cuda/seeta/src/aligner.cpp
+CMakeFiles/GPU-CNN.dir/aligner.cpp.o: /cuda/GPU-CNN/src/aligner.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/GPU-CNN.dir/aligner.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/aligner.cpp.o -c /cuda/GPU-CNN/src/aligner.cpp
 
 CMakeFiles/GPU-CNN.dir/aligner.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/aligner.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/aligner.cpp > CMakeFiles/GPU-CNN.dir/aligner.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/aligner.cpp > CMakeFiles/GPU-CNN.dir/aligner.cpp.i
 
 CMakeFiles/GPU-CNN.dir/aligner.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/aligner.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/aligner.cpp -o CMakeFiles/GPU-CNN.dir/aligner.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/aligner.cpp -o CMakeFiles/GPU-CNN.dir/aligner.cpp.s
 
 CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o: /cuda/seeta/src/bias_adder_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o -c /cuda/seeta/src/bias_adder_net.cpp
+CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o: /cuda/GPU-CNN/src/bias_adder_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o -c /cuda/GPU-CNN/src/bias_adder_net.cpp
 
 CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/bias_adder_net.cpp > CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/bias_adder_net.cpp > CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/bias_adder_net.cpp -o CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/bias_adder_net.cpp -o CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/blob.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/blob.cpp.o: /cuda/seeta/src/blob.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/GPU-CNN.dir/blob.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/blob.cpp.o -c /cuda/seeta/src/blob.cpp
+CMakeFiles/GPU-CNN.dir/blob.cpp.o: /cuda/GPU-CNN/src/blob.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/GPU-CNN.dir/blob.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/blob.cpp.o -c /cuda/GPU-CNN/src/blob.cpp
 
 CMakeFiles/GPU-CNN.dir/blob.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/blob.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/blob.cpp > CMakeFiles/GPU-CNN.dir/blob.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/blob.cpp > CMakeFiles/GPU-CNN.dir/blob.cpp.i
 
 CMakeFiles/GPU-CNN.dir/blob.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/blob.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/blob.cpp -o CMakeFiles/GPU-CNN.dir/blob.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/blob.cpp -o CMakeFiles/GPU-CNN.dir/blob.cpp.s
 
 CMakeFiles/GPU-CNN.dir/bn_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/bn_net.cpp.o: /cuda/seeta/src/bn_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/GPU-CNN.dir/bn_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/bn_net.cpp.o -c /cuda/seeta/src/bn_net.cpp
+CMakeFiles/GPU-CNN.dir/bn_net.cpp.o: /cuda/GPU-CNN/src/bn_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/GPU-CNN.dir/bn_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/bn_net.cpp.o -c /cuda/GPU-CNN/src/bn_net.cpp
 
 CMakeFiles/GPU-CNN.dir/bn_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/bn_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/bn_net.cpp > CMakeFiles/GPU-CNN.dir/bn_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/bn_net.cpp > CMakeFiles/GPU-CNN.dir/bn_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/bn_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/bn_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/bn_net.cpp -o CMakeFiles/GPU-CNN.dir/bn_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/bn_net.cpp -o CMakeFiles/GPU-CNN.dir/bn_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/cfan.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/cfan.cpp.o: /cuda/seeta/src/cfan.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/GPU-CNN.dir/cfan.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/cfan.cpp.o -c /cuda/seeta/src/cfan.cpp
+CMakeFiles/GPU-CNN.dir/cfan.cpp.o: /cuda/GPU-CNN/src/cfan.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/GPU-CNN.dir/cfan.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/cfan.cpp.o -c /cuda/GPU-CNN/src/cfan.cpp
 
 CMakeFiles/GPU-CNN.dir/cfan.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/cfan.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/cfan.cpp > CMakeFiles/GPU-CNN.dir/cfan.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/cfan.cpp > CMakeFiles/GPU-CNN.dir/cfan.cpp.i
 
 CMakeFiles/GPU-CNN.dir/cfan.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/cfan.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/cfan.cpp -o CMakeFiles/GPU-CNN.dir/cfan.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/cfan.cpp -o CMakeFiles/GPU-CNN.dir/cfan.cpp.s
 
 CMakeFiles/GPU-CNN.dir/common_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/common_net.cpp.o: /cuda/seeta/src/common_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/GPU-CNN.dir/common_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/common_net.cpp.o -c /cuda/seeta/src/common_net.cpp
+CMakeFiles/GPU-CNN.dir/common_net.cpp.o: /cuda/GPU-CNN/src/common_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/GPU-CNN.dir/common_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/common_net.cpp.o -c /cuda/GPU-CNN/src/common_net.cpp
 
 CMakeFiles/GPU-CNN.dir/common_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/common_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/common_net.cpp > CMakeFiles/GPU-CNN.dir/common_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/common_net.cpp > CMakeFiles/GPU-CNN.dir/common_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/common_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/common_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/common_net.cpp -o CMakeFiles/GPU-CNN.dir/common_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/common_net.cpp -o CMakeFiles/GPU-CNN.dir/common_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/conv_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/conv_net.cpp.o: /cuda/seeta/src/conv_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/GPU-CNN.dir/conv_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/conv_net.cpp.o -c /cuda/seeta/src/conv_net.cpp
+CMakeFiles/GPU-CNN.dir/conv_net.cpp.o: /cuda/GPU-CNN/src/conv_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/GPU-CNN.dir/conv_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/conv_net.cpp.o -c /cuda/GPU-CNN/src/conv_net.cpp
 
 CMakeFiles/GPU-CNN.dir/conv_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/conv_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/conv_net.cpp > CMakeFiles/GPU-CNN.dir/conv_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/conv_net.cpp > CMakeFiles/GPU-CNN.dir/conv_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/conv_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/conv_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/conv_net.cpp -o CMakeFiles/GPU-CNN.dir/conv_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/conv_net.cpp -o CMakeFiles/GPU-CNN.dir/conv_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o: /cuda/seeta/src/cudaDevice.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o -c /cuda/seeta/src/cudaDevice.cpp
+CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o: /cuda/GPU-CNN/src/cudaDevice.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.o -c /cuda/GPU-CNN/src/cudaDevice.cpp
 
 CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/cudaDevice.cpp > CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/cudaDevice.cpp > CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.i
 
 CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/cudaDevice.cpp -o CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/cudaDevice.cpp -o CMakeFiles/GPU-CNN.dir/cudaDevice.cpp.s
 
 CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o: /cuda/seeta/src/eltwise_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o -c /cuda/seeta/src/eltwise_net.cpp
+CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o: /cuda/GPU-CNN/src/eltwise_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.o -c /cuda/GPU-CNN/src/eltwise_net.cpp
 
 CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/eltwise_net.cpp > CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/eltwise_net.cpp > CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/eltwise_net.cpp -o CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/eltwise_net.cpp -o CMakeFiles/GPU-CNN.dir/eltwise_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o: /cuda/seeta/src/face_alignment.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o -c /cuda/seeta/src/face_alignment.cpp
+CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o: /cuda/GPU-CNN/src/face_alignment.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/face_alignment.cpp.o -c /cuda/GPU-CNN/src/face_alignment.cpp
 
 CMakeFiles/GPU-CNN.dir/face_alignment.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/face_alignment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/face_alignment.cpp > CMakeFiles/GPU-CNN.dir/face_alignment.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/face_alignment.cpp > CMakeFiles/GPU-CNN.dir/face_alignment.cpp.i
 
 CMakeFiles/GPU-CNN.dir/face_alignment.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/face_alignment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/face_alignment.cpp -o CMakeFiles/GPU-CNN.dir/face_alignment.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/face_alignment.cpp -o CMakeFiles/GPU-CNN.dir/face_alignment.cpp.s
 
 CMakeFiles/GPU-CNN.dir/face_detection.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/face_detection.cpp.o: /cuda/seeta/src/face_detection.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/GPU-CNN.dir/face_detection.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/face_detection.cpp.o -c /cuda/seeta/src/face_detection.cpp
+CMakeFiles/GPU-CNN.dir/face_detection.cpp.o: /cuda/GPU-CNN/src/face_detection.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/GPU-CNN.dir/face_detection.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/face_detection.cpp.o -c /cuda/GPU-CNN/src/face_detection.cpp
 
 CMakeFiles/GPU-CNN.dir/face_detection.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/face_detection.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/face_detection.cpp > CMakeFiles/GPU-CNN.dir/face_detection.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/face_detection.cpp > CMakeFiles/GPU-CNN.dir/face_detection.cpp.i
 
 CMakeFiles/GPU-CNN.dir/face_detection.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/face_detection.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/face_detection.cpp -o CMakeFiles/GPU-CNN.dir/face_detection.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/face_detection.cpp -o CMakeFiles/GPU-CNN.dir/face_detection.cpp.s
 
 CMakeFiles/GPU-CNN.dir/face_identification.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/face_identification.cpp.o: /cuda/seeta/src/face_identification.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/GPU-CNN.dir/face_identification.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/face_identification.cpp.o -c /cuda/seeta/src/face_identification.cpp
+CMakeFiles/GPU-CNN.dir/face_identification.cpp.o: /cuda/GPU-CNN/src/face_identification.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/GPU-CNN.dir/face_identification.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/face_identification.cpp.o -c /cuda/GPU-CNN/src/face_identification.cpp
 
 CMakeFiles/GPU-CNN.dir/face_identification.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/face_identification.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/face_identification.cpp > CMakeFiles/GPU-CNN.dir/face_identification.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/face_identification.cpp > CMakeFiles/GPU-CNN.dir/face_identification.cpp.i
 
 CMakeFiles/GPU-CNN.dir/face_identification.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/face_identification.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/face_identification.cpp -o CMakeFiles/GPU-CNN.dir/face_identification.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/face_identification.cpp -o CMakeFiles/GPU-CNN.dir/face_identification.cpp.s
 
 CMakeFiles/GPU-CNN.dir/fust.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/fust.cpp.o: /cuda/seeta/src/fust.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/GPU-CNN.dir/fust.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/fust.cpp.o -c /cuda/seeta/src/fust.cpp
+CMakeFiles/GPU-CNN.dir/fust.cpp.o: /cuda/GPU-CNN/src/fust.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/GPU-CNN.dir/fust.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/fust.cpp.o -c /cuda/GPU-CNN/src/fust.cpp
 
 CMakeFiles/GPU-CNN.dir/fust.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/fust.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/fust.cpp > CMakeFiles/GPU-CNN.dir/fust.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/fust.cpp > CMakeFiles/GPU-CNN.dir/fust.cpp.i
 
 CMakeFiles/GPU-CNN.dir/fust.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/fust.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/fust.cpp -o CMakeFiles/GPU-CNN.dir/fust.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/fust.cpp -o CMakeFiles/GPU-CNN.dir/fust.cpp.s
 
 CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.o: /cuda/seeta/src/image_pyramid.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.o -c /cuda/seeta/src/image_pyramid.cpp
+CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.o: /cuda/GPU-CNN/src/image_pyramid.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.o -c /cuda/GPU-CNN/src/image_pyramid.cpp
 
 CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/image_pyramid.cpp > CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/image_pyramid.cpp > CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.i
 
 CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/image_pyramid.cpp -o CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/image_pyramid.cpp -o CMakeFiles/GPU-CNN.dir/image_pyramid.cpp.s
 
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/seeta/src/inner_product_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o -c /cuda/seeta/src/inner_product_net.cpp
+CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/inner_product_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o -c /cuda/GPU-CNN/src/inner_product_net.cpp
 
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/inner_product_net.cpp > CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/inner_product_net.cpp > CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/inner_product_net.cpp -o CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/inner_product_net.cpp -o CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.o: /cuda/seeta/src/lab_boost_model_reader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.o -c /cuda/seeta/src/lab_boost_model_reader.cpp
+CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.o: /cuda/GPU-CNN/src/lab_boost_model_reader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.o -c /cuda/GPU-CNN/src/lab_boost_model_reader.cpp
 
 CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/lab_boost_model_reader.cpp > CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/lab_boost_model_reader.cpp > CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.i
 
 CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/lab_boost_model_reader.cpp -o CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/lab_boost_model_reader.cpp -o CMakeFiles/GPU-CNN.dir/lab_boost_model_reader.cpp.s
 
 CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.o: /cuda/seeta/src/lab_boosted_classifier.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.o -c /cuda/seeta/src/lab_boosted_classifier.cpp
+CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.o: /cuda/GPU-CNN/src/lab_boosted_classifier.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.o -c /cuda/GPU-CNN/src/lab_boosted_classifier.cpp
 
 CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/lab_boosted_classifier.cpp > CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/lab_boosted_classifier.cpp > CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.i
 
 CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/lab_boosted_classifier.cpp -o CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/lab_boosted_classifier.cpp -o CMakeFiles/GPU-CNN.dir/lab_boosted_classifier.cpp.s
 
 CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.o: /cuda/seeta/src/lab_feature_map.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.o -c /cuda/seeta/src/lab_feature_map.cpp
+CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.o: /cuda/GPU-CNN/src/lab_feature_map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.o -c /cuda/GPU-CNN/src/lab_feature_map.cpp
 
 CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/lab_feature_map.cpp > CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/lab_feature_map.cpp > CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.i
 
 CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/lab_feature_map.cpp -o CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/lab_feature_map.cpp -o CMakeFiles/GPU-CNN.dir/lab_feature_map.cpp.s
 
 CMakeFiles/GPU-CNN.dir/log.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/log.cpp.o: /cuda/seeta/src/log.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/GPU-CNN.dir/log.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/log.cpp.o -c /cuda/seeta/src/log.cpp
+CMakeFiles/GPU-CNN.dir/log.cpp.o: /cuda/GPU-CNN/src/log.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/GPU-CNN.dir/log.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/log.cpp.o -c /cuda/GPU-CNN/src/log.cpp
 
 CMakeFiles/GPU-CNN.dir/log.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/log.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/log.cpp > CMakeFiles/GPU-CNN.dir/log.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/log.cpp > CMakeFiles/GPU-CNN.dir/log.cpp.i
 
 CMakeFiles/GPU-CNN.dir/log.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/log.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/log.cpp -o CMakeFiles/GPU-CNN.dir/log.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/log.cpp -o CMakeFiles/GPU-CNN.dir/log.cpp.s
 
 CMakeFiles/GPU-CNN.dir/math_functions.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/math_functions.cpp.o: /cuda/seeta/src/math_functions.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/GPU-CNN.dir/math_functions.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/math_functions.cpp.o -c /cuda/seeta/src/math_functions.cpp
+CMakeFiles/GPU-CNN.dir/math_functions.cpp.o: /cuda/GPU-CNN/src/math_functions.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/GPU-CNN.dir/math_functions.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/math_functions.cpp.o -c /cuda/GPU-CNN/src/math_functions.cpp
 
 CMakeFiles/GPU-CNN.dir/math_functions.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/math_functions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/math_functions.cpp > CMakeFiles/GPU-CNN.dir/math_functions.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/math_functions.cpp > CMakeFiles/GPU-CNN.dir/math_functions.cpp.i
 
 CMakeFiles/GPU-CNN.dir/math_functions.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/math_functions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/math_functions.cpp -o CMakeFiles/GPU-CNN.dir/math_functions.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/math_functions.cpp -o CMakeFiles/GPU-CNN.dir/math_functions.cpp.s
 
 CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.o: /cuda/seeta/src/max_pooling_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.o -c /cuda/seeta/src/max_pooling_net.cpp
+CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.o: /cuda/GPU-CNN/src/max_pooling_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.o -c /cuda/GPU-CNN/src/max_pooling_net.cpp
 
 CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/max_pooling_net.cpp > CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/max_pooling_net.cpp > CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/max_pooling_net.cpp -o CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/max_pooling_net.cpp -o CMakeFiles/GPU-CNN.dir/max_pooling_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/mlp.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/mlp.cpp.o: /cuda/seeta/src/mlp.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/GPU-CNN.dir/mlp.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/mlp.cpp.o -c /cuda/seeta/src/mlp.cpp
+CMakeFiles/GPU-CNN.dir/mlp.cpp.o: /cuda/GPU-CNN/src/mlp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/GPU-CNN.dir/mlp.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/mlp.cpp.o -c /cuda/GPU-CNN/src/mlp.cpp
 
 CMakeFiles/GPU-CNN.dir/mlp.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/mlp.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/mlp.cpp > CMakeFiles/GPU-CNN.dir/mlp.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/mlp.cpp > CMakeFiles/GPU-CNN.dir/mlp.cpp.i
 
 CMakeFiles/GPU-CNN.dir/mlp.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/mlp.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/mlp.cpp -o CMakeFiles/GPU-CNN.dir/mlp.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/mlp.cpp -o CMakeFiles/GPU-CNN.dir/mlp.cpp.s
 
 CMakeFiles/GPU-CNN.dir/net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/net.cpp.o: /cuda/seeta/src/net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/GPU-CNN.dir/net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/net.cpp.o -c /cuda/seeta/src/net.cpp
+CMakeFiles/GPU-CNN.dir/net.cpp.o: /cuda/GPU-CNN/src/net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/GPU-CNN.dir/net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/net.cpp.o -c /cuda/GPU-CNN/src/net.cpp
 
 CMakeFiles/GPU-CNN.dir/net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/net.cpp > CMakeFiles/GPU-CNN.dir/net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/net.cpp > CMakeFiles/GPU-CNN.dir/net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/net.cpp -o CMakeFiles/GPU-CNN.dir/net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/net.cpp -o CMakeFiles/GPU-CNN.dir/net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/nms.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/nms.cpp.o: /cuda/seeta/src/nms.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/GPU-CNN.dir/nms.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/nms.cpp.o -c /cuda/seeta/src/nms.cpp
+CMakeFiles/GPU-CNN.dir/nms.cpp.o: /cuda/GPU-CNN/src/nms.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/GPU-CNN.dir/nms.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/nms.cpp.o -c /cuda/GPU-CNN/src/nms.cpp
 
 CMakeFiles/GPU-CNN.dir/nms.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/nms.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/nms.cpp > CMakeFiles/GPU-CNN.dir/nms.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/nms.cpp > CMakeFiles/GPU-CNN.dir/nms.cpp.i
 
 CMakeFiles/GPU-CNN.dir/nms.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/nms.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/nms.cpp -o CMakeFiles/GPU-CNN.dir/nms.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/nms.cpp -o CMakeFiles/GPU-CNN.dir/nms.cpp.s
 
 CMakeFiles/GPU-CNN.dir/pad_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/pad_net.cpp.o: /cuda/seeta/src/pad_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/GPU-CNN.dir/pad_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/pad_net.cpp.o -c /cuda/seeta/src/pad_net.cpp
+CMakeFiles/GPU-CNN.dir/pad_net.cpp.o: /cuda/GPU-CNN/src/pad_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/GPU-CNN.dir/pad_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/pad_net.cpp.o -c /cuda/GPU-CNN/src/pad_net.cpp
 
 CMakeFiles/GPU-CNN.dir/pad_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/pad_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/pad_net.cpp > CMakeFiles/GPU-CNN.dir/pad_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/pad_net.cpp > CMakeFiles/GPU-CNN.dir/pad_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/pad_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/pad_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/pad_net.cpp -o CMakeFiles/GPU-CNN.dir/pad_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/pad_net.cpp -o CMakeFiles/GPU-CNN.dir/pad_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/sift.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/sift.cpp.o: /cuda/seeta/src/sift.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/GPU-CNN.dir/sift.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/sift.cpp.o -c /cuda/seeta/src/sift.cpp
+CMakeFiles/GPU-CNN.dir/sift.cpp.o: /cuda/GPU-CNN/src/sift.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/GPU-CNN.dir/sift.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/sift.cpp.o -c /cuda/GPU-CNN/src/sift.cpp
 
 CMakeFiles/GPU-CNN.dir/sift.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/sift.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/sift.cpp > CMakeFiles/GPU-CNN.dir/sift.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/sift.cpp > CMakeFiles/GPU-CNN.dir/sift.cpp.i
 
 CMakeFiles/GPU-CNN.dir/sift.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/sift.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/sift.cpp -o CMakeFiles/GPU-CNN.dir/sift.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/sift.cpp -o CMakeFiles/GPU-CNN.dir/sift.cpp.s
 
 CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.o: /cuda/seeta/src/spatial_transform_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.o -c /cuda/seeta/src/spatial_transform_net.cpp
+CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.o: /cuda/GPU-CNN/src/spatial_transform_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.o -c /cuda/GPU-CNN/src/spatial_transform_net.cpp
 
 CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/spatial_transform_net.cpp > CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/spatial_transform_net.cpp > CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/spatial_transform_net.cpp -o CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/spatial_transform_net.cpp -o CMakeFiles/GPU-CNN.dir/spatial_transform_net.cpp.s
 
 CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.o: /cuda/seeta/src/surf_feature_map.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.o -c /cuda/seeta/src/surf_feature_map.cpp
+CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.o: /cuda/GPU-CNN/src/surf_feature_map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.o -c /cuda/GPU-CNN/src/surf_feature_map.cpp
 
 CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/surf_feature_map.cpp > CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/surf_feature_map.cpp > CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.i
 
 CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/surf_feature_map.cpp -o CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/surf_feature_map.cpp -o CMakeFiles/GPU-CNN.dir/surf_feature_map.cpp.s
 
 CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.o: /cuda/seeta/src/surf_mlp.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.o -c /cuda/seeta/src/surf_mlp.cpp
+CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.o: /cuda/GPU-CNN/src/surf_mlp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.o -c /cuda/GPU-CNN/src/surf_mlp.cpp
 
 CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/surf_mlp.cpp > CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/surf_mlp.cpp > CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.i
 
 CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/surf_mlp.cpp -o CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/surf_mlp.cpp -o CMakeFiles/GPU-CNN.dir/surf_mlp.cpp.s
 
 CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o: /cuda/seeta/src/surf_mlp_model_reader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o -c /cuda/seeta/src/surf_mlp_model_reader.cpp
+CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o: /cuda/GPU-CNN/src/surf_mlp_model_reader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.o -c /cuda/GPU-CNN/src/surf_mlp_model_reader.cpp
 
 CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/surf_mlp_model_reader.cpp > CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/surf_mlp_model_reader.cpp > CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.i
 
 CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/surf_mlp_model_reader.cpp -o CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/surf_mlp_model_reader.cpp -o CMakeFiles/GPU-CNN.dir/surf_mlp_model_reader.cpp.s
 
 CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o: /cuda/seeta/src/test_face_recognizer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o -c /cuda/seeta/src/test_face_recognizer.cpp
+CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o: /cuda/GPU-CNN/src/test_face_recognizer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.o -c /cuda/GPU-CNN/src/test_face_recognizer.cpp
 
 CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/test_face_recognizer.cpp > CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/test_face_recognizer.cpp > CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.i
 
 CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/test_face_recognizer.cpp -o CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/test_face_recognizer.cpp -o CMakeFiles/GPU-CNN.dir/test_face_recognizer.cpp.s
 
 CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o: CMakeFiles/GPU-CNN.dir/flags.make
-CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o: /cuda/seeta/src/tform_maker_net.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o -c /cuda/seeta/src/tform_maker_net.cpp
+CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o: /cuda/GPU-CNN/src/tform_maker_net.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.o -c /cuda/GPU-CNN/src/tform_maker_net.cpp
 
 CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/seeta/src/tform_maker_net.cpp > CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cuda/GPU-CNN/src/tform_maker_net.cpp > CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.i
 
 CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/seeta/src/tform_maker_net.cpp -o CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cuda/GPU-CNN/src/tform_maker_net.cpp -o CMakeFiles/GPU-CNN.dir/tform_maker_net.cpp.s
 
 # Object files for target GPU-CNN
 GPU__CNN_OBJECTS = \
@@ -713,8 +713,8 @@ GPU__CNN_OBJECTS = \
 
 # External object files for target GPU-CNN
 GPU__CNN_EXTERNAL_OBJECTS = \
-"/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o" \
-"/cuda/seeta/build/CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o"
+"/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o" \
+"/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o"
 
 GPU-CNN: CMakeFiles/GPU-CNN.dir/aligner.cpp.o
 GPU-CNN: CMakeFiles/GPU-CNN.dir/bias_adder_net.cpp.o
@@ -753,25 +753,25 @@ GPU-CNN: CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o
 GPU-CNN: CMakeFiles/GPU-CNN.dir/build.make
 GPU-CNN: /usr/lib/x86_64-linux-gnu/libcudart_static.a
 GPU-CNN: /usr/lib/x86_64-linux-gnu/librt.so
-GPU-CNN: /usr/local/lib/libopencv_dnn.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_gapi.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_highgui.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_ml.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_objdetect.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_photo.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_stitching.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_video.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_videoio.so.4.1.2
+GPU-CNN: /usr/local/lib/libopencv_dnn.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_gapi.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_ml.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_objdetect.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_photo.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_stitching.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_video.so.4.0.0
 GPU-CNN: /usr/lib/x86_64-linux-gnu/libcudart_static.a
 GPU-CNN: /usr/lib/x86_64-linux-gnu/librt.so
-GPU-CNN: /usr/local/lib/libopencv_imgcodecs.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_calib3d.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_features2d.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_flann.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_imgproc.so.4.1.2
-GPU-CNN: /usr/local/lib/libopencv_core.so.4.1.2
+GPU-CNN: /usr/local/lib/libopencv_calib3d.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_features2d.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_flann.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_highgui.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_videoio.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_imgcodecs.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_imgproc.so.4.0.0
+GPU-CNN: /usr/local/lib/libopencv_core.so.4.0.0
 GPU-CNN: CMakeFiles/GPU-CNN.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cuda/seeta/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Linking CXX executable GPU-CNN"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cuda/GPU-CNN/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Linking CXX executable GPU-CNN"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/GPU-CNN.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -785,6 +785,6 @@ CMakeFiles/GPU-CNN.dir/clean:
 
 CMakeFiles/GPU-CNN.dir/depend: CMakeFiles/GPU-CNN.dir/GPU-CNN_generated_math_functions.cu.o
 CMakeFiles/GPU-CNN.dir/depend: CMakeFiles/GPU-CNN.dir/GPU-CNN_intermediate_link.o
-	cd /cuda/seeta/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cuda/seeta/src /cuda/seeta/src /cuda/seeta/build /cuda/seeta/build /cuda/seeta/build/CMakeFiles/GPU-CNN.dir/DependInfo.cmake --color=$(COLOR)
+	cd /cuda/GPU-CNN/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cuda/GPU-CNN/src /cuda/GPU-CNN/src /cuda/GPU-CNN/build /cuda/GPU-CNN/build /cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/GPU-CNN.dir/depend
 

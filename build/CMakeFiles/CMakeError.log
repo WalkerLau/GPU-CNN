@@ -1,24 +1,24 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /cuda/seeta/build/CMakeFiles/CMakeTmp
+Change Dir: /cuda/GPU-CNN/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_a9f1b/fast"
-/usr/bin/make -f CMakeFiles/cmTC_a9f1b.dir/build.make CMakeFiles/cmTC_a9f1b.dir/build
-make[1]: Entering directory '/cuda/seeta/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_a9f1b.dir/CheckSymbolExists.c.o
-/usr/bin/cc   -fPIC    -o CMakeFiles/cmTC_a9f1b.dir/CheckSymbolExists.c.o   -c /cuda/seeta/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_a9f1b
-/usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9f1b.dir/link.txt --verbose=1
-/usr/bin/cc -fPIC     -rdynamic CMakeFiles/cmTC_a9f1b.dir/CheckSymbolExists.c.o  -o cmTC_a9f1b 
-CMakeFiles/cmTC_a9f1b.dir/CheckSymbolExists.c.o: In function `main':
+Run Build Command:"/usr/bin/make" "cmTC_7b095/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7b095.dir/build.make CMakeFiles/cmTC_7b095.dir/build
+make[1]: Entering directory '/cuda/GPU-CNN/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7b095.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -fPIC    -o CMakeFiles/cmTC_7b095.dir/CheckSymbolExists.c.o   -c /cuda/GPU-CNN/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_7b095
+/usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b095.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC     -rdynamic CMakeFiles/cmTC_7b095.dir/CheckSymbolExists.c.o  -o cmTC_7b095 
+CMakeFiles/cmTC_7b095.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_a9f1b.dir/build.make:86: recipe for target 'cmTC_a9f1b' failed
-make[1]: *** [cmTC_a9f1b] Error 1
-make[1]: Leaving directory '/cuda/seeta/build/CMakeFiles/CMakeTmp'
-Makefile:121: recipe for target 'cmTC_a9f1b/fast' failed
-make: *** [cmTC_a9f1b/fast] Error 2
+CMakeFiles/cmTC_7b095.dir/build.make:86: recipe for target 'cmTC_7b095' failed
+make[1]: *** [cmTC_7b095] Error 1
+make[1]: Leaving directory '/cuda/GPU-CNN/build/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_7b095/fast' failed
+make: *** [cmTC_7b095/fast] Error 2
 
-File /cuda/seeta/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /cuda/GPU-CNN/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
@@ -34,22 +34,22 @@ int main(int argc, char** argv)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /cuda/seeta/build/CMakeFiles/CMakeTmp
+Change Dir: /cuda/GPU-CNN/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_e1a18/fast"
-/usr/bin/make -f CMakeFiles/cmTC_e1a18.dir/build.make CMakeFiles/cmTC_e1a18.dir/build
-make[1]: Entering directory '/cuda/seeta/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_e1a18.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e1a18.dir/CheckFunctionExists.c.o   -c /usr/local/lib/python3.5/dist-packages/cmake/data/share/cmake-3.13/Modules/CheckFunctionExists.c
-Linking C executable cmTC_e1a18
-/usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e1a18.dir/link.txt --verbose=1
-/usr/bin/cc -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_e1a18.dir/CheckFunctionExists.c.o  -o cmTC_e1a18 -lpthreads 
+Run Build Command:"/usr/bin/make" "cmTC_92518/fast"
+/usr/bin/make -f CMakeFiles/cmTC_92518.dir/build.make CMakeFiles/cmTC_92518.dir/build
+make[1]: Entering directory '/cuda/GPU-CNN/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_92518.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_92518.dir/CheckFunctionExists.c.o   -c /usr/local/lib/python3.5/dist-packages/cmake/data/share/cmake-3.13/Modules/CheckFunctionExists.c
+Linking C executable cmTC_92518
+/usr/local/lib/python3.5/dist-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92518.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_92518.dir/CheckFunctionExists.c.o  -o cmTC_92518 -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_e1a18.dir/build.make:86: recipe for target 'cmTC_e1a18' failed
-make[1]: *** [cmTC_e1a18] Error 1
-make[1]: Leaving directory '/cuda/seeta/build/CMakeFiles/CMakeTmp'
-Makefile:121: recipe for target 'cmTC_e1a18/fast' failed
-make: *** [cmTC_e1a18/fast] Error 2
+CMakeFiles/cmTC_92518.dir/build.make:86: recipe for target 'cmTC_92518' failed
+make[1]: *** [cmTC_92518] Error 1
+make[1]: Leaving directory '/cuda/GPU-CNN/build/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_92518/fast' failed
+make: *** [cmTC_92518/fast] Error 2
 
 

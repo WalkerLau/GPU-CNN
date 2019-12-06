@@ -173,7 +173,7 @@ void ConvNet::Execute() {
     cudaMemcpy(dst_head, dPtr_ofm, size_ofm*sizeof(float), cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();
     cnt = clock() - start_clock;
-    std::cout << "cuda_matrix_procuct clock = " << cnt << std::endl;
+    std::cout << "cuda_matrix_procuct clock = " << cnt << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << "ms" << std::endl;
     cudaFree(dPtr_weights);
   }
 

@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/cuda/seeta/src/blob.h
+/cuda/GPU-CNN/src/blob.h
 log.h
-/cuda/seeta/src/log.h
+/cuda/GPU-CNN/src/log.h
 viplnet.h
-/cuda/seeta/src/viplnet.h
+/cuda/GPU-CNN/src/viplnet.h
 vector
 -
 string
@@ -20,29 +20,29 @@ memory
 algorithm
 -
 
-/cuda/seeta/src/conv_net.cpp
+/cuda/GPU-CNN/src/conv_net.cpp
 cuda_runtime_api.h
 -
 cuda_runtime.h
 -
 conv_net.h
-/cuda/seeta/src/conv_net.h
+/cuda/GPU-CNN/src/conv_net.h
 math_functions.h
-/cuda/seeta/src/math_functions.h
+/cuda/GPU-CNN/src/math_functions.h
 math_functions.cuh
-/cuda/seeta/src/math_functions.cuh
+/cuda/GPU-CNN/src/math_functions.cuh
 time.h
-/cuda/seeta/src/time.h
+/cuda/GPU-CNN/src/time.h
 ctime
-/cuda/seeta/src/ctime
+/cuda/GPU-CNN/src/ctime
 ctime
 -
 
-/cuda/seeta/src/conv_net.h
+/cuda/GPU-CNN/src/conv_net.h
 net.h
-/cuda/seeta/src/net.h
+/cuda/GPU-CNN/src/net.h
 net_factory.h
-/cuda/seeta/src/net_factory.h
+/cuda/GPU-CNN/src/net_factory.h
 cstdio
 -
 cstdlib
@@ -50,9 +50,9 @@ cstdlib
 cstring
 -
 
-/cuda/seeta/src/hyper_param.h
+/cuda/GPU-CNN/src/hyper_param.h
 log.h
-/cuda/seeta/src/log.h
+/cuda/GPU-CNN/src/log.h
 vector
 -
 string
@@ -60,9 +60,9 @@ string
 map
 -
 
-/cuda/seeta/src/log.h
+/cuda/GPU-CNN/src/log.h
 viplnet.h
-/cuda/seeta/src/viplnet.h
+/cuda/GPU-CNN/src/viplnet.h
 iostream
 -
 sstream
@@ -74,7 +74,7 @@ string.h
 math.h
 -
 
-/cuda/seeta/src/math_functions.cuh
+/cuda/GPU-CNN/src/math_functions.cuh
 cuda_runtime_api.h
 -
 cuda_runtime.h
@@ -84,9 +84,9 @@ stdio.h
 cuda_fp16.h
 -
 
-/cuda/seeta/src/math_functions.h
+/cuda/GPU-CNN/src/math_functions.h
 log.h
-/cuda/seeta/src/log.h
+/cuda/GPU-CNN/src/log.h
 cstring
 -
 string.h
@@ -94,21 +94,21 @@ string.h
 armadillo
 -
 
-/cuda/seeta/src/net.h
+/cuda/GPU-CNN/src/net.h
 viplnet.h
-/cuda/seeta/src/viplnet.h
+/cuda/GPU-CNN/src/viplnet.h
 blob.h
-/cuda/seeta/src/blob.h
+/cuda/GPU-CNN/src/blob.h
 log.h
-/cuda/seeta/src/log.h
+/cuda/GPU-CNN/src/log.h
 hyper_param.h
-/cuda/seeta/src/hyper_param.h
+/cuda/GPU-CNN/src/hyper_param.h
 vector
 -
 
-/cuda/seeta/src/net_factory.h
+/cuda/GPU-CNN/src/net_factory.h
 net.h
-/cuda/seeta/src/net.h
+/cuda/GPU-CNN/src/net.h
 map
 -
 string
@@ -118,5 +118,5 @@ iostream
 memory
 -
 
-/cuda/seeta/src/viplnet.h
+/cuda/GPU-CNN/src/viplnet.h
 
