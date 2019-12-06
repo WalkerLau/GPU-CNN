@@ -37,7 +37,7 @@ __host__ void cuda_matrix_procuct(float* A, float* B, float* C, const int n,
 		case CONV4:{
 			//conv-net parameters
 			const int stride  = 1;
-			const int src_w   = 15;
+			const int src_w   = 15;		//should also modify A_tem in conv_grid
 			const int src_chn = 128;
 			const int fil_w   = 3;
 			const int dst_w   = 13;		//should also modify C_tem in conv_grid
@@ -89,7 +89,7 @@ __host__ void convolute(float* A, float* B, float* C,
 
 	//create new space to store rearranged B
 	data_t* filters;
-	cudaMalloc((void **)&filters, sizeof(data_t) * block_num * para_chn * fil_h * fil_w);
+	cudaMalloc((void **)&filters, sizeof(data_t)* block_num * para_chn * fil_h * fil_w);
 
 	//initiate C to be zeros
 	cudaMemset(C, 0, sizeof(float)*dst_chn*dst_h*dst_w);
@@ -221,48 +221,57 @@ __global__ void conv_grid(data_t* A, float* filters, float*C,
 	__shared__ data_t ifmaps[4][3][3];
 	__shared__ float  filtem[4][3][3];
 	__shared__ float     res[4][3][3];
-	__shared__ float  C_tem[13 * 13];	//[dst_h * dst_w]	// noted in convolute
+	__shared__ float   A_tem[4 * 15 * 15];	//[para_chn * src_h * src_w]	// noted in convolute
+	__shared__ float   C_tem[13 * 13];		//[dst_h * dst_w]	// noted in convolute
 
 	//load filtem
 	filtem[tz][ty][tx] = filters[(bz*para_chn + tz)*fil_h*fil_w + ty*fil_w + tx];
 	__syncthreads();
+
+	//load A_tem
+	for(int i = 0; i*para_chn*fil_h*fil_w < para_chn*src_h*src_w; ++i){
+		if( (i*para_chn*fil_h*fil_w + tidx) < para_chn*src_h*src_w){
+			A_tem[i*para_chn*fil_h*fil_w + tidx] = A[bz*para_chn*src_h*src_w + i*para_chn*fil_h*fil_w + tidx]; 
+		}
+	}
 
 	//sliding window
 	//clk_start = clock();
 	for(int h = 0; h < dst_h; ++h){
 		for(int w = 0; w < dst_w; ++w){
 			//load ifmaps
-			ifmaps[tz][ty][tx] = A[(bz*para_chn + tz)*src_h*src_w + (h*stride + ty)*src_w + (w*stride + tx)];
+			ifmaps[tz][ty][tx] = A_tem[tz*src_h*src_w + (h*stride + ty)*src_w + (w*stride + tx)];
+			//ifmaps[tz][ty][tx] = A[(bz*para_chn + tz)*src_h*src_w + (h*stride + ty)*src_w + (w*stride + tx)];
 			__syncthreads();
 
 			//calculate ofmap element
 			res[tz][ty][tx] = ifmaps[tz][ty][tx] * filtem[tz][ty][tx];
-			__syncthreads();			
+			//__syncthreads();			
 			if(0 == tx){
 				for(int k = 1; k < fil_w; ++k){
 					res[tz][ty][tx] += res[tz][ty][tx + k];
 				}
 			}	
-			__syncthreads();
+			//__syncthreads();
 			if(0 == ty && 0 == tx){
 				for(int k = 1; k < fil_h; ++k){
 					res[tz][ty][tx] += res[tz][ty + k][tx];
 				}
 			}
-			__syncthreads();	
+			//__syncthreads();	
 			if(0 == tz && 0 == ty && 0 == tx){
 				for(int k = 1; k < para_chn; ++k){
 					res[tz][ty][tx] += res[tz + k][ty][tx];
 				}
 			}
-			__syncthreads();
+			//__syncthreads();
 
 			//store result to C_tem
 			if(0 == tz && 0 == ty && 0 == tx){
 				//C[(ofm_lump*block_num + bz)*dst_h*dst_w + h*dst_w + w] += res[tz][ty][tx];
 				C_tem[h*dst_w + w] = res[tz][ty][tx];
 			}
-			__syncthreads();
+			//__syncthreads();
 
 		}
 	}
@@ -270,11 +279,14 @@ __global__ void conv_grid(data_t* A, float* filters, float*C,
 	//printf(".....sliding = %ld\n",cnt);
 
 	//store final result to C
+	//clk_start = clock();
 	for(int i = 0; i*para_chn*fil_h*fil_w < dst_h*dst_w; ++i){
 		if( (i*para_chn*fil_h*fil_w + tidx) < dst_h*dst_w){
 			C[(ofm_lump*block_num + bz)*dst_h*dst_w + i*para_chn*fil_h*fil_w + tidx]
 				+= C_tem[i*para_chn*fil_h*fil_w + tidx];
 		}
 	}
+	//cnt = clock() - clk_start;
+	//printf(".....write C = %ld\n",cnt);
 
 }
