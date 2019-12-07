@@ -168,7 +168,7 @@ void ConvNet::Execute() {
     clock_t start_clock, cnt = 0;
     cudaDeviceSynchronize();
     start_clock = clock();
-    cuda_wrapper(dPtr_ifm, dPtr_weights, dPtr_ofm, dst_size, dst_channels, kernel_size);
+    cuda_matrix_procuct(dPtr_ifm, dPtr_weights, dPtr_ofm, dst_size, dst_channels, kernel_size);
     // fetch output-feature-maps from GPU
     cudaMemcpy(dst_head, dPtr_ofm, size_ofm*sizeof(float), cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();

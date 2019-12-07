@@ -19,6 +19,7 @@ __host__ void convolute(float* A, float* B, float* C,
     const int dst_w   ,
     const int dst_chn);
 
+/*
 __global__ void rearrange_A(float* A, data_t* ifmaps, 
     const int src_w,
     const int para_chn,
@@ -34,13 +35,15 @@ __global__ void rearrange_B(float* B, data_t* filters,
     const int para_chn,
     const int block_num
     );
+*/
 
-__global__ void conv_grid(data_t* A, float* filters, float* C,
+__global__ void conv_grid(data_t* A, float* B, float* C,
     const int src_w   ,
+	const int src_chn ,
     const int fil_w   ,
     const int dst_w   ,
+    const int ifm_lump,
     const int ofm_lump,
-    const int para_chn,
     const int block_num,
     const int stride
     );
