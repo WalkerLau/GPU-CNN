@@ -66,7 +66,8 @@ __host__ void convolute(float* A, float* B, float* C,
 	const int dst_h = dst_w;
 	
 	//cuda_Grid params
-	const int block_num = 256;
+	const int para_chn  = 1;		//should also modify memory allocation in conv_grid  
+	const int block_num = dst_chn;
 	dim3 dimGrid(1,1,block_num);
 	dim3 dimBlock(dst_w, dst_h, 1);
 
@@ -74,11 +75,11 @@ __host__ void convolute(float* A, float* B, float* C,
 	cudaMemset(C, 0, sizeof(float)*dst_chn*dst_h*dst_w);
 
 	//get the whole ofmaps volume
-	for(int ifm_lump = 0; ifm_lump < src_chn; ++ifm_lump){
+	for(int ifm_lump = 0; ifm_lump < src_chn/para_chn; ++ifm_lump){
 		for(int ofm_lump = 0; ofm_lump < dst_chn/block_num; ++ofm_lump){
 			//get partial sum for block_num ofmaps
 			conv_grid<<<dimGrid, dimBlock>>>
-				(A, B, C, src_w, src_chn, fil_w, dst_w, ifm_lump, ofm_lump, block_num, stride);
+				(A, B, C, src_w, src_chn, fil_w, dst_w, ifm_lump, ofm_lump, block_num, stride, para_chn);
 		}
 	}
 }
@@ -92,7 +93,8 @@ __global__ void conv_grid(data_t* A, float* B, float*C,
 	const int ifm_lump,
 	const int ofm_lump,
 	const int block_num,
-	const int stride
+	const int stride,
+	const int para_chn
 	){
 	//con_layer params
 	const int src_h = src_w;
@@ -101,6 +103,8 @@ __global__ void conv_grid(data_t* A, float* B, float*C,
  
 	//test time
 	//clock_t clk_start, cnt = 0;
+	//if(0 == bz && 0 == ty && 0 == tx) clk_start = clock();
+	//if(0 == bz && 0 == ty && 0 == tx) printf("....calculate = %ld\n",clock() - clk_start);
 
 	//grid index
 	int bz  = blockIdx.z;  
@@ -108,28 +112,29 @@ __global__ void conv_grid(data_t* A, float* B, float*C,
 	int tid = ty*blockDim.x + tx;
 
 	//allocate shared memory & registers
-	__shared__ data_t ifmaps[15*15];	//[src_h * src_w]
-	float filters[3*3]; 	//[fil_h * fil_w]
+	__shared__ data_t ifmaps[1*15*15];	//[para_chn * src_h * src_w]
+	float filters[1*3*3]; 	//[para_chn * fil_h * fil_w]
 	float res = 0;
 
 	//load ifmaps
-	for(int i = 0; i*dst_h*dst_w < src_h*src_w; ++i){
-		if(i*dst_h*dst_w + tid < src_h*src_w){
-			ifmaps[i*dst_h*dst_w + tid] = A[ifm_lump*src_h*src_w + i*dst_h*dst_w + tid];
+	for(int i = 0; i*dst_h*dst_w < para_chn*src_h*src_w; ++i){
+		if(i*dst_h*dst_w + tid < para_chn*src_h*src_w){
+			ifmaps[i*dst_h*dst_w + tid] = A[ifm_lump*para_chn*src_h*src_w + i*dst_h*dst_w + tid];
 		}
-		__syncthreads();
 	}
 
 	//load filters
-	for(int i = 0; i < fil_h*fil_w; ++i){
-		filters[i] = B[(ofm_lump*block_num*src_chn + ifm_lump + bz*src_chn)*fil_h*fil_w + i];
+	for(int i = 0; i < para_chn*fil_h*fil_w; ++i){
+		filters[i] = B[(ofm_lump*block_num*src_chn + ifm_lump*para_chn + bz*src_chn)*fil_h*fil_w + i];
 	}
 
 	//calculate partial sum
-	for(int i = 0, k = 0; i < fil_h; ++i){
-		for(int j = 0; j < fil_w; ++j){
-			res += ifmaps[ty*stride*src_w + tx*stride + i*src_w + j] * filters[k];
-			++k; 
+	for(int c = 0, k = 0; c < para_chn; ++c){
+		for(int h = 0; h < fil_h; ++h){
+			for(int w = 0; w < fil_w; ++w){
+				res += ifmaps[c*src_h*src_w + ty*stride*src_w + tx*stride + h*src_w + w] * filters[k];
+				++k; 
+			}
 		}
 	}
 

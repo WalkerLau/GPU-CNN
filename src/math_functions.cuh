@@ -45,7 +45,8 @@ __global__ void conv_grid(data_t* A, float* B, float* C,
     const int ifm_lump,
     const int ofm_lump,
     const int block_num,
-    const int stride
+    const int stride,
+    const int para_chn
     );
     
 
