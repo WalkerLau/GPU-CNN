@@ -4,9 +4,12 @@
 #include <cuda_runtime_api.h>
 #include <cuda_runtime.h>
 #include <stdio.h>
+#include <iostream>
 
 #include <cuda_fp16.h>
 typedef float data_t;
+
+#define CUDA_M 1
 
 __host__ void cuda_matrix_procuct(float* A, float* B, float* C, const int n,
     const int m, const int k);
@@ -18,24 +21,6 @@ __host__ void convolute(float* A, float* B, float* C,
     const int fil_w   ,
     const int dst_w   ,
     const int dst_chn);
-
-/*
-__global__ void rearrange_A(float* A, data_t* ifmaps, 
-    const int src_w,
-    const int para_chn,
-    const int ifm_lump,
-    const int block_num
-    );
-
-__global__ void rearrange_B(float* B, data_t* filters,
-    const int src_chn ,
-    const int fil_w   ,
-    const int ifm_lump,
-    const int ofm_lump,
-    const int para_chn,
-    const int block_num
-    );
-*/
 
 __global__ void conv_grid(data_t* A, float* B, float* C,
     const int src_w   ,
@@ -49,5 +34,14 @@ __global__ void conv_grid(data_t* A, float* B, float* C,
     const int para_chn
     );
     
+__host__ void cuda_fc_wrapper(const float* A, const float* B, float* C, 
+    const int vec_len, 
+    const int dst_chn
+    );
+
+__global__ void cuda_fc(const float* A, const float* B, float* C, 
+    const int vec_len, 
+    const int dst_chn
+    );
 
 #endif

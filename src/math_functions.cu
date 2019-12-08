@@ -1,5 +1,4 @@
 #include "math_functions.cuh"
-#include <iostream>
 
 #define CONV1 3*9*9*48	    // number of elements in filters of CONV1 is 3*9*9*48
 #define CONV2 48*3*3*128	// number of elements in filters of CONV2 is 48*3*3*128
@@ -17,12 +16,39 @@ __host__ void cuda_matrix_procuct(float* A, float* B, float* C, const int n,
 
 	switch(m*k){		
 		case CONV1:{
+			//conv-net parameters
+			//const int stride  = 4;
+			//const int src_w   = 228;		
+			//const int src_chn = 3;
+			//const int fil_w   = 9;
+			//const int dst_w   = 55;		
+			//const int dst_chn = 48;
+			//convolute(A, B, C,
+			//		  stride, src_w, src_chn, fil_w, dst_w, dst_chn);
 			break;
 		}			
 		case CONV2:{
+			//conv-net parameters
+			const int stride  = 1;
+			const int src_w   = 29;		
+			const int src_chn = 48;
+			const int fil_w   = 3;
+			const int dst_w   = 27;		
+			const int dst_chn = 128;
+			convolute(A, B, C,
+					  stride, src_w, src_chn, fil_w, dst_w, dst_chn);
 			break;
 		}
 		case CONV3:{
+			//conv-net parameters
+			const int stride  = 1;
+			const int src_w   = 29;		
+			const int src_chn = 128;
+			const int fil_w   = 3;
+			const int dst_w   = 27;		
+			const int dst_chn = 128;
+			convolute(A, B, C,
+					  stride, src_w, src_chn, fil_w, dst_w, dst_chn);
 			break;
 		}
 		case CONV4:{
@@ -33,23 +59,48 @@ __host__ void cuda_matrix_procuct(float* A, float* B, float* C, const int n,
 			const int fil_w   = 3;
 			const int dst_w   = 13;		
 			const int dst_chn = 256;
-            
 			convolute(A, B, C,
 					  stride, src_w, src_chn, fil_w, dst_w, dst_chn);
-
 			break;
 		}
 		case CONV5:{
+			//conv-net parameters
+			const int stride  = 1;
+			const int src_w   = 15;		
+			const int src_chn = 256;
+			const int fil_w   = 3;
+			const int dst_w   = 13;		
+			const int dst_chn = 192;
+			convolute(A, B, C,
+					  stride, src_w, src_chn, fil_w, dst_w, dst_chn);
 			break;
 		}
 		case CONV6:{
+			//conv-net parameters
+			const int stride  = 1;
+			const int src_w   = 15;		
+			const int src_chn = 192;
+			const int fil_w   = 3;
+			const int dst_w   = 13;		
+			const int dst_chn = 192;
+			convolute(A, B, C,
+					  stride, src_w, src_chn, fil_w, dst_w, dst_chn);
 			break;
 		}
 		case CONV7:{
+			//conv-net parameters
+			const int stride  = 1;
+			const int src_w   = 15;		
+			const int src_chn = 192;
+			const int fil_w   = 3;
+			const int dst_w   = 13;		
+			const int dst_chn = 128;
+			convolute(A, B, C,
+					  stride, src_w, src_chn, fil_w, dst_w, dst_chn);
 			break;
 		}
 		default: 
-			std::cout<<"Can't match conv_layers!"<<std::endl;
+			std::cout<<"ERROR! Can't match conv_layers!"<<std::endl;
 
 	}
 }
@@ -112,7 +163,7 @@ __global__ void conv_grid(data_t* A, float* B, float*C,
 	int tid = ty*blockDim.x + tx;
 
 	//allocate shared memory & registers
-	__shared__ data_t ifmaps[1*15*15];	//[para_chn * src_h * src_w]
+	__shared__ data_t ifmaps[1*29*29];	//[para_chn * src_h * src_w]
 	float filters[1*3*3]; 	//[para_chn * fil_h * fil_w]
 	float res = 0;
 
@@ -141,4 +192,67 @@ __global__ void conv_grid(data_t* A, float* B, float*C,
 	//write C
 	C[ofm_lump*block_num*dst_h*dst_w + bz*dst_h*dst_w + ty*dst_w + tx] += res;
 
+}
+
+
+__host__ void cuda_fc_wrapper(const float* A, const float* B, float* C, 
+	const int vec_len, 
+	const int dst_chn
+	){
+	//copy data to GPU global memory
+	float* src;
+	float* fil;
+	float* dst;
+	cudaMalloc((void **)&src, vec_len * sizeof(float));
+	cudaMalloc((void **)&fil, vec_len * dst_chn * sizeof(float));
+	cudaMalloc((void **)&dst, dst_chn * sizeof(float));
+	cudaMemcpy(src, A, vec_len * sizeof(float), cudaMemcpyHostToDevice);
+	cudaMemcpy(fil, B, vec_len * dst_chn * sizeof(float), cudaMemcpyHostToDevice);
+
+	//configure fc info & calculate
+	if(4096 == dst_chn){
+		cuda_fc<<<4,1024>>>(src, fil, dst, vec_len, dst_chn);
+	}
+	else if(2048 == dst_chn){
+		cuda_fc<<<2,1024>>>(src, fil, dst, vec_len, dst_chn);
+	}
+	else{
+		std::cout<<"ERROR! Cannot match FC layer!"<<std::endl;
+	}
+
+	//copy result to host
+	cudaMemcpy(C, dst, dst_chn * sizeof(float), cudaMemcpyDeviceToHost);
+	//free Malloc
+	cudaFree(dst);
+	cudaFree(fil);
+	cudaFree(src);
+
+}
+
+__global__ void cuda_fc(const float* A, const float* B, float* C, 
+	const int vec_len, 
+	const int dst_chn
+	){
+	const int bx = blockIdx.x;
+	const int tx = threadIdx.x;
+	const int tid = bx*blockDim.x + tx;
+	
+	//allocate memory
+	__shared__ float src[128*6*6];		//max src size
+
+	//load src
+	for(int i = 0; i*blockDim.x < vec_len; ++i){
+		if(i*blockDim.x + tx < vec_len){
+			src[i*blockDim.x + tx] = A[i*blockDim.x + tx];
+		}
+	}
+
+	//calculate res
+	float res = 0;
+	for(int i = 0; i < vec_len; ++i){
+		res += src[i] * B[tid*vec_len + i];
+	}
+
+	//write C
+	C[tid] = res;
 }

@@ -130,6 +130,7 @@ CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/hyper_param.h
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/inner_product_net.cpp
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/inner_product_net.h
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/log.h
+CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/math_functions.cuh
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/math_functions.h
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/net.h
 CMakeFiles/GPU-CNN.dir/inner_product_net.cpp.o: /cuda/GPU-CNN/src/net_factory.h

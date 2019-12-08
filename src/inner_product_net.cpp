@@ -31,6 +31,9 @@
 
 #include "inner_product_net.h"
 #include "math_functions.h"
+#include "math_functions.cuh"
+#include "time.h"
+#include "ctime"
 
 void InnerProductNet::SetUp() {
   // check input and output blob size
@@ -52,6 +55,8 @@ void InnerProductNet::Execute() {
   int src_h = input->height();
   int src_w = input->width();
   int dst_channels = weight->num();
+
+  clock_t clk_start;
   
   LOG(DEBUG) << "input blob: (" <<src_num << "," << src_channels << "," << src_h 
     << "," << src_w << ")";
@@ -59,15 +64,29 @@ void InnerProductNet::Execute() {
   const int vec_len = src_channels * src_h * src_w;
   float* const dst_head = new float[src_num * dst_channels];
   const float* src_data = input->data().get();
-  for (int sn = 0, didx = 0; sn < src_num; ++sn) {
-    const float* weight_data = weight->data().get();
-    for (int dc = 0; dc < dst_channels; ++dc) {
-      dst_head[didx++] = simd_dot(src_data, weight_data, vec_len);
-      weight_data += vec_len;
-    } // for dc
-    
-    src_data += vec_len;
-  } // for sn
+  if(CUDA_M){
+    clk_start = clock();
+    for (int sn = 0; sn < src_num; ++sn) {
+      const float* weight_data = weight->data().get();
+      cuda_fc_wrapper(src_data, weight_data, dst_head, vec_len, dst_channels);
+      src_data += vec_len;
+    } // for sn
+    std::cout<<"cuda FC layer = "<< clock() - clk_start <<std::endl;
+  }
+  else{
+    clk_start = clock();
+    for (int sn = 0, didx = 0; sn < src_num; ++sn) {
+      const float* weight_data = weight->data().get();    
+      for (int dc = 0; dc < dst_channels; ++dc) {
+        dst_head[didx++] = simd_dot(src_data, weight_data, vec_len);
+        weight_data += vec_len;
+      } // for dc
+      src_data += vec_len;
+    } // for sn
+    std::cout<<"cpu  FC layer = "<< clock() - clk_start <<std::endl;
+  }
+
+
   
   output->CopyData(src_num, dst_channels, 1, 1, dst_head);
   delete[] dst_head;

@@ -37,6 +37,14 @@
 #include "time.h"
 #include "ctime"
 
+#define CONV1 3*9*9*48	    // number of elements in filters of CONV1 is 3*9*9*48
+#define CONV2 48*3*3*128	// number of elements in filters of CONV2 is 48*3*3*128
+#define CONV3 128*3*3*128	// number of elements in filters of CONV3 is 128*3*3*128
+#define CONV4 128*3*3*256	// number of elements in filters of CONV4 is 128*3*3*256
+#define CONV5 256*3*3*192	// number of elements in filters of CONV5 is 256*3*3*192
+#define CONV6 192*3*3*192	// number of elements in filters of CONV6 is 192*3*3*192
+#define CONV7 192*3*3*128	// number of elements in filters of CONV7 is 192*3*3*128
+
 #ifdef __VIPL_LOG__
 #include <ctime>
 #endif
@@ -83,18 +91,7 @@ void ConvNet::Execute() {
   int end_w = src_w - kernel_w + 1;
   int dst_size = dst_h * dst_w;
   int kernel_size = src_channels * kernel_h * kernel_w;
-
   const int src_num_offset = src_channels * src_h * src_w;
-
-  // chg 改：给硬件函数的输入分配连续内存
-  //cudaPitchedPtr devPtr_ifm;
-  //cudaPitchedPtr devPtr_ofm;
-  //cudaExtent ext_ifm = make_cudaExtent(src_w * sizeof(float), src_h, src_channels);
-  //cudaExtent ext_ofm = make_cudaExtent(dst_w * sizeof(float), dst_h, dst_channels);
-  //cudaMalloc3D(&devPtr_ifm, ext_ifm);
-  //cudaMalloc3D(&devPtr_ofm, ext_ofm);
-  //cudaMemcpy3DParms Parms3Difm = {0};
-  //cudaMemcpy3DParms Parms3Dofm = {0};
 
   float* dPtr_ifm;
   float* dPtr_ofm;
@@ -120,7 +117,10 @@ void ConvNet::Execute() {
 #endif
 
   //chg 改：双模运行模式对memcpy的改进
-  if(128*3*3*256 != kernel_size * dst_channels){   //  128*3*3*256 != kernel_size * dst_channels
+  if(CONV1 != kernel_size * dst_channels){   //  128*3*3*256 != kernel_size * dst_channels
+    cudaMemcpy(dPtr_ifm, src_data, size_ifm * sizeof(float), cudaMemcpyHostToDevice);   // chg 加：直接拷贝ifmap volume的数据。
+  }
+  else{
     float* mat_data = mat_head;
     for (int sh = 0; sh < end_h; sh += stride_h_) {		// 纵向移窗。
       for (int sw = 0; sw < end_w; sw += stride_w_) {	// 横向移窗。
@@ -136,9 +136,6 @@ void ConvNet::Execute() {
       } // for sw
     } // for sh
     src_data += src_num_offset;
-  }
-  else{
-    cudaMemcpy(dPtr_ifm, src_data, size_ifm * sizeof(float), cudaMemcpyHostToDevice);   // chg 加：直接拷贝ifmap volume的数据。
   }
   
 
@@ -157,14 +154,7 @@ void ConvNet::Execute() {
   cudaMalloc((void **)&dPtr_weights, size_weights * sizeof(float));
   cudaMemcpy((void **)dPtr_weights, ptr_temp, size_weights*sizeof(float), cudaMemcpyHostToDevice);
 
-  if(128*3*3*256 != kernel_size * dst_channels){
-    clock_t start_clock, cnt = 0;
-    start_clock = clock();
-    matrix_procuct(mat_head, weight_head, dst_head, dst_size, dst_channels, kernel_size, true, false);
-    cnt = clock() - start_clock;
-    std::cout << "matrix_procuct clock      = " << cnt << std::endl;
-  }
-  else{
+  if(CONV1 != kernel_size * dst_channels){
     clock_t start_clock, cnt = 0;
     cudaDeviceSynchronize();
     start_clock = clock();
@@ -173,10 +163,18 @@ void ConvNet::Execute() {
     cudaMemcpy(dst_head, dPtr_ofm, size_ofm*sizeof(float), cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();
     cnt = clock() - start_clock;
-    std::cout << "cuda_matrix_procuct clock = " << cnt << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << "ms" << std::endl;
+    std::cout << "cuda_matrix_procuct clock = " << cnt ; 
+    std::cout.width(16); std::cout << "time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms" << std::endl;
     cudaFree(dPtr_weights);
   }
-
+  else{
+    clock_t start_clock, cnt = 0;
+    start_clock = clock();
+    matrix_procuct(mat_head, weight_head, dst_head, dst_size, dst_channels, kernel_size, true, false);
+    cnt = clock() - start_clock;
+    std::cout << "matrix_procuct clock      = " << cnt ; 
+    std::cout.width(15); std::cout << "time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms" << std::endl;
+  }
 
 #ifdef __VIPL_LOG__
     t_end = clock();

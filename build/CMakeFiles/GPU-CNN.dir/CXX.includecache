@@ -81,6 +81,8 @@ cuda_runtime.h
 -
 stdio.h
 -
+iostream
+-
 cuda_fp16.h
 -
 
