@@ -9,7 +9,8 @@
 #include <cuda_fp16.h>
 typedef float data_t;
 
-#define CUDA_M 1
+#define CUDA_C 1
+#define CUDA_F 1
 
 __host__ void cuda_matrix_procuct(float* A, float* B, float* C, const int n,
     const int m, const int k);

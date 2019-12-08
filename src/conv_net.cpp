@@ -117,7 +117,7 @@ void ConvNet::Execute() {
 #endif
 
   //chg 改：双模运行模式对memcpy的改进
-  if(CONV1 != kernel_size * dst_channels){   //  128*3*3*256 != kernel_size * dst_channels
+  if((CONV1 != kernel_size * dst_channels) && CUDA_C){   //  128*3*3*256 != kernel_size * dst_channels
     cudaMemcpy(dPtr_ifm, src_data, size_ifm * sizeof(float), cudaMemcpyHostToDevice);   // chg 加：直接拷贝ifmap volume的数据。
   }
   else{
@@ -154,7 +154,7 @@ void ConvNet::Execute() {
   cudaMalloc((void **)&dPtr_weights, size_weights * sizeof(float));
   cudaMemcpy((void **)dPtr_weights, ptr_temp, size_weights*sizeof(float), cudaMemcpyHostToDevice);
 
-  if(CONV1 != kernel_size * dst_channels){
+  if((CONV1 != kernel_size * dst_channels) && CUDA_C){
     clock_t start_clock, cnt = 0;
     cudaDeviceSynchronize();
     start_clock = clock();
@@ -163,8 +163,8 @@ void ConvNet::Execute() {
     cudaMemcpy(dst_head, dPtr_ofm, size_ofm*sizeof(float), cudaMemcpyDeviceToHost);
     cudaDeviceSynchronize();
     cnt = clock() - start_clock;
-    std::cout << "cuda_matrix_procuct clock = " << cnt ; 
-    std::cout.width(16); std::cout << "time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms" << std::endl;
+    std::cout << "GPU Conv layer clock = " << cnt ; 
+    std::cout << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms" << std::endl;
     cudaFree(dPtr_weights);
   }
   else{
@@ -172,8 +172,8 @@ void ConvNet::Execute() {
     start_clock = clock();
     matrix_procuct(mat_head, weight_head, dst_head, dst_size, dst_channels, kernel_size, true, false);
     cnt = clock() - start_clock;
-    std::cout << "matrix_procuct clock      = " << cnt ; 
-    std::cout.width(15); std::cout << "time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms" << std::endl;
+    std::cout << "CPU Conv layer clock = " << cnt ; 
+    std::cout << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms" << std::endl;
   }
 
 #ifdef __VIPL_LOG__

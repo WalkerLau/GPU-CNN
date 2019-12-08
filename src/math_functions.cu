@@ -194,6 +194,8 @@ __global__ void conv_grid(data_t* A, float* B, float*C,
 
 }
 
+//FC layer's blockDim
+#define PARA 64
 
 __host__ void cuda_fc_wrapper(const float* A, const float* B, float* C, 
 	const int vec_len, 
@@ -208,13 +210,16 @@ __host__ void cuda_fc_wrapper(const float* A, const float* B, float* C,
 	cudaMalloc((void **)&dst, dst_chn * sizeof(float));
 	cudaMemcpy(src, A, vec_len * sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemcpy(fil, B, vec_len * dst_chn * sizeof(float), cudaMemcpyHostToDevice);
+	
+	//blcokDim
+	const int para = PARA;	//should also modify shared memory in cuda_fc
 
 	//configure fc info & calculate
 	if(4096 == dst_chn){
-		cuda_fc<<<4,1024>>>(src, fil, dst, vec_len, dst_chn);
+		cuda_fc<<<4096, para>>>(src, fil, dst, vec_len, dst_chn);
 	}
 	else if(2048 == dst_chn){
-		cuda_fc<<<2,1024>>>(src, fil, dst, vec_len, dst_chn);
+		cuda_fc<<<2048, para>>>(src, fil, dst, vec_len, dst_chn);
 	}
 	else{
 		std::cout<<"ERROR! Cannot match FC layer!"<<std::endl;
@@ -235,24 +240,29 @@ __global__ void cuda_fc(const float* A, const float* B, float* C,
 	){
 	const int bx = blockIdx.x;
 	const int tx = threadIdx.x;
-	const int tid = bx*blockDim.x + tx;
-	
+	const int para = blockDim.x;		//src size
+
 	//allocate memory
-	__shared__ float src[128*6*6];		//max src size
+	__shared__ float src[PARA];		//max src size = [para]
+	__shared__ float fil[PARA];		//max fil size = [para]
 
-	//load src
-	for(int i = 0; i*blockDim.x < vec_len; ++i){
-		if(i*blockDim.x + tx < vec_len){
-			src[i*blockDim.x + tx] = A[i*blockDim.x + tx];
+	//load & calculate
+	__shared__ float res;
+	if(0 == tx){res = 0.0;}
+	for(int i = 0; i*para < vec_len; ++i){
+		src[tx] = A[i*para + tx];
+		fil[tx] = B[bx*vec_len + i*para + tx];
+		__syncthreads();
+		if(0 == tx){
+			for(int k = 0; k < para; ++k){
+				res += src[k] * fil[k];
+			}
 		}
-	}
-
-	//calculate res
-	float res = 0;
-	for(int i = 0; i < vec_len; ++i){
-		res += src[i] * B[tid*vec_len + i];
+		__syncthreads();
 	}
 
 	//write C
-	C[tid] = res;
+	if(0 == tx){
+		C[bx] = res;
+	}
 }

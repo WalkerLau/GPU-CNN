@@ -56,7 +56,7 @@ void InnerProductNet::Execute() {
   int src_w = input->width();
   int dst_channels = weight->num();
 
-  clock_t clk_start;
+  clock_t clk_start, cnt;
   
   LOG(DEBUG) << "input blob: (" <<src_num << "," << src_channels << "," << src_h 
     << "," << src_w << ")";
@@ -64,14 +64,18 @@ void InnerProductNet::Execute() {
   const int vec_len = src_channels * src_h * src_w;
   float* const dst_head = new float[src_num * dst_channels];
   const float* src_data = input->data().get();
-  if(CUDA_M){
+
+  //calculate FC layer
+  if(CUDA_F){
     clk_start = clock();
     for (int sn = 0; sn < src_num; ++sn) {
       const float* weight_data = weight->data().get();
       cuda_fc_wrapper(src_data, weight_data, dst_head, vec_len, dst_channels);
       src_data += vec_len;
     } // for sn
-    std::cout<<"cuda FC layer = "<< clock() - clk_start <<std::endl;
+    cnt = clock() - clk_start;
+    std::cout << "GPU FC layer clock = "<< cnt;
+    std::cout << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms"  <<std::endl;
   }
   else{
     clk_start = clock();
@@ -83,10 +87,10 @@ void InnerProductNet::Execute() {
       } // for dc
       src_data += vec_len;
     } // for sn
-    std::cout<<"cpu  FC layer = "<< clock() - clk_start <<std::endl;
+    cnt = clock() - clk_start;
+    std::cout << "CPU FC layer clock = "<< cnt;
+    std::cout << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms"  <<std::endl;
   }
-
-
   
   output->CopyData(src_num, dst_channels, 1, 1, dst_head);
   delete[] dst_head;
