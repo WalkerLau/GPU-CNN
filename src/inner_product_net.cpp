@@ -27,6 +27,17 @@
  *
  * Note: the above information must be kept whenever or wherever the codes are used.
  *
+ * -----------------------------------------------------------------------------------------------------
+ * The GPU acceleration parts of this file are developed by Xuanzhi LIU (Walker LAU).
+ * 
+ * If you want to get the latest version of this project or met any problems,
+ * please go to <https://github.com/WalkerLau/GPU-CNN> , 
+ * I will try to help as much as I can.
+ * 
+ * You can redistribute this source codes and/or modify it under the terms of the BSD 2-Clause License.
+ *
+ * Note: the above information must be kept whenever or wherever the codes are used.
+ *
  */
 
 #include "inner_product_net.h"
@@ -74,8 +85,8 @@ void InnerProductNet::Execute() {
       src_data += vec_len;
     } // for sn
     cnt = clock() - clk_start;
-    std::cout << "GPU FC layer clock = "<< cnt;
-    std::cout << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms"  <<std::endl;
+    std::cout << "GPU FC layer clock   = "<< cnt;
+    std::cout << "    time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms"  <<std::endl;
   }
   else{
     clk_start = clock();
@@ -88,8 +99,8 @@ void InnerProductNet::Execute() {
       src_data += vec_len;
     } // for sn
     cnt = clock() - clk_start;
-    std::cout << "CPU FC layer clock = "<< cnt;
-    std::cout << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms"  <<std::endl;
+    std::cout << "CPU FC layer clock   = "<< cnt;
+    std::cout << "    time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms"  <<std::endl;
   }
   
   output->CopyData(src_num, dst_channels, 1, 1, dst_head);

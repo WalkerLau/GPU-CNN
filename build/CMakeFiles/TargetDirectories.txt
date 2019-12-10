@@ -1,3 +1,0 @@
-/cuda/GPU-CNN/build/CMakeFiles/rebuild_cache.dir
-/cuda/GPU-CNN/build/CMakeFiles/edit_cache.dir
-/cuda/GPU-CNN/build/CMakeFiles/GPU-CNN.dir

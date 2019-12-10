@@ -28,13 +28,10 @@
  * Note: the above information must be kept whenever or wherever the codes are used.
  *
  * -----------------------------------------------------------------------------------------------------
- * 
- * The FPGA acceleration parts of this file are developed by Xuanzhi LIU (Walker LAU).
- * 
- * This version accelerates all 7 CONV-layers of VIPLFaceNet.
+ * The GPU acceleration parts of this file are developed by Xuanzhi LIU (Walker LAU).
  * 
  * If you want to get the latest version of this project or met any problems,
- * please go to <https://github.com/WalkerLau/Accelerating-CNN-with-FPGA> , 
+ * please go to <https://github.com/WalkerLau/GPU-CNN> , 
  * I will try to help as much as I can.
  * 
  * You can redistribute this source codes and/or modify it under the terms of the BSD 2-Clause License.

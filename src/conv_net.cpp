@@ -26,6 +26,17 @@
  * Contact Info: you can send an email to SeetaFace@vipl.ict.ac.cn for any problems.
  *
  * Note: the above information must be kept whenever or wherever the codes are used.
+ * 
+ * -----------------------------------------------------------------------------------------------------
+ * The GPU acceleration parts of this file are developed by Xuanzhi LIU (Walker LAU).
+ * 
+ * If you want to get the latest version of this project or met any problems,
+ * please go to <https://github.com/WalkerLau/GPU-CNN> , 
+ * I will try to help as much as I can.
+ * 
+ * You can redistribute this source codes and/or modify it under the terms of the BSD 2-Clause License.
+ *
+ * Note: the above information must be kept whenever or wherever the codes are used.
  *
  */
 
@@ -173,7 +184,7 @@ void ConvNet::Execute() {
     matrix_procuct(mat_head, weight_head, dst_head, dst_size, dst_channels, kernel_size, true, false);
     cnt = clock() - start_clock;
     std::cout << "CPU Conv layer clock = " << cnt ; 
-    std::cout << "     time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms" << std::endl;
+    std::cout << "    time = " << 1000.0 *  cnt / CLOCKS_PER_SEC << " ms" << std::endl;
   }
 
 #ifdef __VIPL_LOG__
