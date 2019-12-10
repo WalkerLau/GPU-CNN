@@ -1,7 +1,7 @@
 # Accelerate CNN computation with GPU
 Please indicate the source below when this repo is shared somewhere else:
 
-Source code:  <https://github.com/WalkerLau>
+Source code:  <https://github.com/WalkerLau/GPU-CNN>
  
 The purpose of this repo is to accelerate VIPLFaceNet, a face recognition algorithm with 7 convolution layers, with GPU and CUDA programming.
 
