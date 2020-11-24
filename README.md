@@ -34,7 +34,7 @@ For more infomation about VIPLFaceNet:
    
    `git clone https://github.com/WalkerLau/GPU-CNN.git`
 
-   **Note:** The model file `GPU-CNN/model/seeta_fr_v1.0.bin` is stored in **Git Large File Storage (LFS)**. You should [Download and install Git Large File Storage (LFS)](https://git-lfs.github.com/) before further operations on Linux machine, or download the `seeta_fr_v1.0.bin` independently on this repo's webpage. **Simply "git clone" would not download the complete `seeta_fr_v1.0.bin` and will cause error**. The complete `seeta_fr_v1.0.bin` should be of about 110 MB.
+   **Note:** The model file `GPU-CNN/model/seeta_fr_v1.0.bin` is stored in **Git Large File Storage (LFS)**. You should [Download and install Git Large File Storage (LFS)](https://git-lfs.github.com/) before further operations on Linux machine, or download the `seeta_fr_v1.0.bin` independently from this repo's webpage. **Simply "git clone" would not download the complete `seeta_fr_v1.0.bin` and will cause error**. The complete `seeta_fr_v1.0.bin` should be of about 110 MB.
 
 2. Build
    
